@@ -1,0 +1,174 @@
+@import "~normalize.css";
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+@import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
+
+.df{
+  display: flex;
+}
+.justifyConSpaceBetween{
+  justify-content: space-between;
+}
+.textDecorationCross{
+  text-decoration: line-through;
+}
+.c-grey{
+  color: grey !important;
+}
+.borderLTR0{
+  border-left: 0px;
+  border-top: 0px;
+  border-right: 0px;
+}
+.noOutline{
+  outline: none;
+}
+.noOutline:focus{
+  outline: none;
+}
+.transitionAll{
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+}
+.minWidthUnset{
+  min-width: unset;
+}
+.width87{
+  width: 87%;
+}
+.marginL183{
+  margin-left: 183px;
+}
+/* header */
+.headerNav{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.todoTitleWidth{
+  width: 185px;
+}
+
+
+/* sidebar */
+.sidebarSection{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100vh;
+  z-index: 9;
+}
+.sidebarLinks {
+  text-decoration: none;
+}
+.sidebarLinks:hover {
+  text-decoration: none;
+}
+.sidebarW40{
+  width: 40px;
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+}
+
+/* content */
+.contentSection{
+  margin-left: 180px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  transition: all .5s ease;
+  -webkit-transition: all .3s ease;
+}
+.contentMl40{
+  margin-left: 40px;
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+}
+/* Home */
+.homeBoardDiv{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.noteCard{
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.noteHeaderDiv{
+  display: flex;
+  justify-content: space-between;
+}
+.noteEditBtn{
+  color: #AD99FF !important;
+}
+.noteEditBtn::before{
+  color: #AD99FF !important;
+}
+.noteDoneBtn{
+  color: #B1ECB5 !important;
+}
+.noteDoneBtn::before{
+  color: #B1ECB5 !important;
+}
+.noteDeleteBtn{
+  color: #FF7373 !important;
+}
+.noteDeleteBtn::before{
+  color: #FF7373 !important;
+}
+.noteTodoList{
+  height: 210px;
+  overflow-y: auto;
+  box-shadow: inset 0px 0px 3px 0px grey;
+}
+.noteTodoForm{
+  flex-direction: column;
+}
+.priorityVHColor{
+  color: #182026;
+  text-shadow: 0px 0px 1px #182026;
+}
+.priorityHColor{
+  color: #202B33;
+  text-shadow: 0px 0px 1px #202B33;
+}
+.priorityMColor{
+  color: #30404D;
+  text-shadow: 0px 0px 1px #30404D;
+}
+.priorityLHColor{
+  color: #394B59;
+  text-shadow: 0px 0px 1px #394B59;
+}
+
+
+/* todoList */
+.editBtn{
+  background-color: #AD99FF !important;
+}
+.doneBtn{
+  background-color: #B1ECB5 !important;
+}
+.deleteBtn{
+  background-color: #FF7373 !important;
+}
+
+/* footer */
+.footerNav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+
+.examSettingsForm{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}

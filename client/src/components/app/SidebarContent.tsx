@@ -8,22 +8,23 @@ import { QuestionBank } from './QuestionBank';
 import { Store } from 'src/models/Store';
 import { Home } from './Home';
 import { Sidebar } from './Sidebar';
+import { Controller } from 'src/models/Controller';
 
 export const SidebarContent = observer(
   (props: {
-    sidebarOpen: boolean;
+    controller: typeof Controller.Type;
     store: typeof Store.Type;
   }) => {
     return (
       <section
         className={`ph5 pv3 sidebarContentSection transitionAll ${
-          props.sidebarOpen ? 'contentMl40' : ''
+          props.controller.sidebarClose ? 'contentMl40' : ''
           }`}
       >
         <BrowserRouter>
           <>
             <Sidebar
-              sidebarOpen={props.sidebarOpen}
+              controller={props.controller}
             />
             <Switch>
               <Route
@@ -42,7 +43,11 @@ export const SidebarContent = observer(
                 path="/examSettings"
                 exact={true}
                 strict={true}
-                render={() => <ExamSettings examStore={props.store.examStore} />}
+                render={() =>
+                   <ExamSettings
+                    controller={props.controller}
+                    examStore={props.store.examStore} 
+                   />}
               />
               <Route
                 path="/questionBank"

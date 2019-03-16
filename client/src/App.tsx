@@ -3,7 +3,6 @@ import './App.css';
 import { Header } from './components/app/Header';
 import { inject } from 'mobx-react';
 import { Store } from './models/Store';
-import { useState } from 'react';
 import { Footer } from './components/app/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import { SidebarContent } from './components/app/SidebarContent';
@@ -13,17 +12,16 @@ interface InjecttedPageProps {
 }
 
 export const App = inject('store')((props: InjecttedPageProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
       <BrowserRouter>
         <section className="appSection">
           <Header
-            sidebarOpen={sidebarOpen}
-            setSidebarOpen={(e) => setSidebarOpen(!sidebarOpen)}
+            controller={props.store!.controller}
+            // setSidebarOpen={(e) => setSidebarOpen(!sidebarOpen)}
           />
           <SidebarContent 
-            sidebarOpen={sidebarOpen}
+            controller={props.store!.controller}
             store={props.store!}
           />
           <Footer />

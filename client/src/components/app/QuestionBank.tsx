@@ -17,7 +17,6 @@ export const QuestionBank = observer(() => {
           <div>
             <div className="w-50 ph3 dib">
               <FormGroup
-                helperText="Enter Question"
                 label="Question"
                 labelFor="question"
                 labelInfo="(required)"
@@ -31,7 +30,6 @@ export const QuestionBank = observer(() => {
             </div>
             <div className="w-50 ph3 dib">
               <FormGroup
-                helperText="Enter Answer"
                 label="Answer"
                 labelFor="answer"
                 labelInfo="(required)"
@@ -47,7 +45,6 @@ export const QuestionBank = observer(() => {
           <div>
             <div className="w-50 ph3 dib">
               <FormGroup
-                helperText="Enter Explanation"
                 label="Explanataion"
                 labelFor="explanataion"
               >
@@ -60,7 +57,6 @@ export const QuestionBank = observer(() => {
             </div>
             <div className="w-50 ph3 dib">
               <FormGroup
-                helperText="Enter Subject"
                 label="Subject"
                 labelFor="subject"
               >

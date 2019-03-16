@@ -10,9 +10,15 @@ import {
   NumericInput
 } from '@blueprintjs/core';
 import { DateInput, TimePicker, TimePrecision } from '@blueprintjs/datetime';
+import { ExamSettingsQPaper } from './ExamSettingsQPaper';
+import { ExamSettingsTable } from './ExamSettingsTable';
+import { Controller } from 'src/models/Controller';
 
 export const ExamSettings = observer(
-  (props: { examStore: typeof ExamStore.Type }) => {
+  (props: {
+    controller: typeof Controller.Type;
+    examStore: typeof ExamStore.Type;
+  }) => {
     return (
       <Card elevation={Elevation.THREE} className="w-100">
         <h2 className="f2 tc mt3 bg-light-green br3">Exam Settings</h2>
@@ -92,16 +98,19 @@ export const ExamSettings = observer(
               <div className="examSettingDisplayControl flex">
                 <p className="tr w-40">Question Paper</p>
                 <label className="bp3-control bp3-switch bp3-large w-20 tc">
-                  <input type="checkbox" />
+                  <input
+                    className="noOutline"
+                    type="checkbox"
+                    checked={props.controller.examSettingDisplayTable}
+                    onChange={e => {
+                      props.controller.toggleExamSettingDisplayTable(props.controller.examSettingDisplayTable);
+                    }}
+                  />
                   <span className="bp3-control-indicator" />
                 </label>
                 <p className="tl w-40 ">Exam List</p>
               </div>
-              <div className="examSettingDisplayContent">
-                <p className="tc f5 mb0">exam.title</p>
-                <p className="tc f7 mb3">exam.subject</p>
-                <p className="f7">List of Questions and answers</p>
-              </div>
+              {props.controller.examSettingDisplayTable ? <ExamSettingsTable /> : <ExamSettingsQPaper />}
             </Card>
           </div>
           <div className="w-100 mt3 formSubmitDiv">

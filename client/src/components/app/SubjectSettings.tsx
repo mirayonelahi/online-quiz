@@ -31,7 +31,7 @@ export const SubjectSettings = observer(
                   onChange={(values: string[]) => {
                     props.subject.setSubjects(values);
                   }}
-                  placeholder="E.g. Biology, Zoology, Mathmatics"
+                  placeholder="Biology, Zoology, Mathmatics"
                   rightElement={
                     <Button
                       icon="cross"

@@ -10,7 +10,7 @@ export const DataBank = observer(() => {
         <div className="w-third pa3 dib">
           <Link to="/examSettings" className="sidebarLinks">
             <Button fill={true}>
-              <span className="bp3-icon-60 bp3-icon-projects ma2"/>
+              <span className="bp3-icon-large bp3-icon-clipboard mh2 mv3 f45 df flex-column items-center"/>
               <p className="f4 tc ma2">Exam Settings</p>
             </Button>
           </Link>
@@ -18,7 +18,7 @@ export const DataBank = observer(() => {
         <div className="w-third pa3 dib">
           <Link to="/questionBank" className="sidebarLinks">
             <Button fill={true}>
-              <span className="bp3-icon-60 bp3-icon-projects ma2"/>
+              <span className="bp3-icon-large bp3-icon-projects mh2 mv3 f45 df flex-column items-center"/>
               <p className="f4 tc ma2">Question Bank</p>
             </Button>
           </Link>
@@ -26,7 +26,7 @@ export const DataBank = observer(() => {
         <div className="w-third pa3 dib">
           <Link to="/subjectSettings" className="sidebarLinks">
             <Button fill={true}>
-              <span className="bp3-icon-60 bp3-icon-projects ma2"/>
+              <span className="bp3-icon-large bp3-icon-book mh2 mv3 f45 df flex-column items-center"/>
               <p className="f4 tc ma2">Subject Settings</p>
             </Button>
           </Link>

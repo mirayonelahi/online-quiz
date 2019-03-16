@@ -24,7 +24,8 @@ export const QuestionBank = observer(() => {
               >
                 <InputGroup
                   id="question"
-                  placeholder="question"
+                  placeholder="Whice one is prime number?"
+                  leftIcon="document"
                   // value={props.examStore.exam.title}
                   // onChange={}
                 />
@@ -39,9 +40,8 @@ export const QuestionBank = observer(() => {
               >
                 <InputGroup
                   id="answer"
-                  placeholder="answer"
-                  // value={props.examStore.exam.title}
-                  // onChange={}
+                  placeholder="5"
+                  leftIcon="document-open"
                 />
               </FormGroup>
             </div>
@@ -51,13 +51,11 @@ export const QuestionBank = observer(() => {
               helperText="Enter Explanation"
               label="Explanataion"
               labelFor="explanataion"
-              labelInfo="(required)"
             >
               <InputGroup
                 id="explanataion"
-                placeholder="explanataion"
-                // value={props.examStore.exam.title}
-                // onChange={}
+                placeholder="5 is only divisible by 1 and 5"
+                leftIcon="geosearch"
               />
             </FormGroup>
           </div>
@@ -66,7 +64,6 @@ export const QuestionBank = observer(() => {
               icon="add"
               fill={true}
               intent="success"
-              //  onClick=
             >
               Add Question
             </Button>

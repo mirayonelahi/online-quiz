@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 export const Sidebar = observer(
   (props: {
     sidebarOpen: boolean;
-    setSidebarOpen: (value: boolean) => void;
   }) => {
     return (
       <section

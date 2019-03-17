@@ -7,7 +7,8 @@ import {
   Button,
   InputGroup,
   Popover,
-  PopoverInteractionKind
+  PopoverInteractionKind,
+  FileInput,
 } from '@blueprintjs/core';
 import { Subject } from 'src/models/Subject';
 
@@ -47,11 +48,80 @@ export const SubjectSettings = observer(
               </div>
             </div>
             <div>
-            <div className="w-100 ph3">
-              <Button icon="add" fill={true} intent="success">
-                Add Subjects
-              </Button>
-            </div></div>
+              <div className="w-100 ph3 flex">
+                <Button icon="add" fill={true} intent="success">
+                  Add Subjects
+                </Button>
+                <Popover
+                  interactionKind={PopoverInteractionKind.CLICK}
+                  popoverClassName=""
+                  className=""
+                  position="auto"
+                >
+                  <Button 
+                    className="bp3-button bp3-icon-import bp3-intent-primary bp3-popover-dismiss pointer
+                      bg-animate noOutline"
+                  >
+                    {/* <span className="bp3-icon-edit"/> */}
+                  </Button>
+                    <div className="w-100">
+                      <div className="bp3-control-group pa3 flex flex-column">
+                        <p className="mb2 b f5">Import Subjects</p>
+                        <div className="bp3-input-group w-100">
+                          <FormGroup
+                            label="File"
+                            labelFor="file"
+                          >
+                            <FileInput id="file" text="Browse" />
+                          </FormGroup>
+                        </div>
+                        <Button 
+                          type="submit"
+                          className="bp3-button bp3-icon-import
+                            bp3-intent-success bp3-popover-dismiss pointer
+                            br2Important bg-animate w-100 noOutline"
+                        > 
+                        Import
+                        </Button>
+                      </div>
+                    </div>
+                </Popover>
+                <Popover
+                  interactionKind={PopoverInteractionKind.CLICK}
+                  popoverClassName=""
+                  className=""
+                  position="auto"
+                >
+                  <Button 
+                    className="bp3-button bp3-icon-export bp3-intent-primary bp3-popover-dismiss pointer
+                      bg-animate noOutline"
+                  >
+                    {/* <span className="bp3-icon-edit"/> */}
+                  </Button>
+                  <div className="w-100">
+                    <div className="bp3-control-group pa3 flex flex-column">
+                      <p className="mb2 b f5">Export Subjects</p>
+                      <div className="bp3-input-group w-100">
+                        <FormGroup
+                            label="File"
+                            labelFor="file"
+                        >
+                          <FileInput id="file" text="Browse" />
+                        </FormGroup>
+                      </div>
+                      <Button 
+                        type="submit"
+                        className="bp3-button bp3-icon-export
+                          bp3-intent-success bp3-popover-dismiss pointer
+                          br2Important bg-animate w-100 noOutline"
+                      >
+                      Export
+                      </Button>
+                    </div>
+                  </div>
+                </Popover>
+              </div>
+            </div>
           </form>
           <Card elevation={Elevation.ONE} className="w-50 subjectSettingsDisplay overflow-auto pa2">
             <div className="bp3-control-group">

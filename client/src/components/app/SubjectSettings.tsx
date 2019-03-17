@@ -9,6 +9,7 @@ import {
   Popover,
   PopoverInteractionKind,
   FileInput,
+  Tooltip,
 } from '@blueprintjs/core';
 import { Subject } from 'src/models/Subject';
 
@@ -58,15 +59,17 @@ export const SubjectSettings = observer(
                   className=""
                   position="auto"
                 >
-                  <Button 
-                    className="bp3-button bp3-icon-import bp3-intent-primary bp3-popover-dismiss pointer
-                      bg-animate noOutline"
-                  >
-                    {/* <span className="bp3-icon-edit"/> */}
-                  </Button>
+                  <Tooltip content="Import Subjects" position="auto">
+                    <Button 
+                      className="bp3-button bp3-icon-import bp3-intent-primary bp3-popover-dismiss pointer
+                        bg-animate noOutline"
+                    >
+                      {/* <span className="bp3-icon-edit"/> */}
+                    </Button>
+                  </Tooltip>
                     <div className="w-100">
                       <div className="bp3-control-group pa3 flex flex-column">
-                        <p className="mb2 b f5">Import Subjects</p>
+                        <p className="mb2 b f5 bg-light-green br3 pa1">Import Subjects</p>
                         <div className="bp3-input-group w-100">
                           <FormGroup
                             label="File"
@@ -92,15 +95,17 @@ export const SubjectSettings = observer(
                   className=""
                   position="auto"
                 >
-                  <Button 
-                    className="bp3-button bp3-icon-export bp3-intent-primary bp3-popover-dismiss pointer
-                      bg-animate noOutline"
-                  >
-                    {/* <span className="bp3-icon-edit"/> */}
-                  </Button>
+                  <Tooltip content="Export Subjects" position="auto">
+                    <Button 
+                      className="bp3-button bp3-icon-export bp3-intent-primary bp3-popover-dismiss pointer
+                        bg-animate noOutline"
+                    >
+                      {/* <span className="bp3-icon-edit"/> */}
+                    </Button>
+                  </Tooltip>
                   <div className="w-100">
                     <div className="bp3-control-group pa3 flex flex-column">
-                      <p className="mb2 b f5">Export Subjects</p>
+                      <p className="mb2 b f5 bg-light-green br3 pa1">Export Subjects</p>
                       <div className="bp3-input-group w-100">
                         <FormGroup
                             label="File"
@@ -136,7 +141,7 @@ export const SubjectSettings = observer(
                 <input type="text" className="bp3-input" placeholder="Search" />
               </div>
             </div>
-            <p className="f6 tc mt2 b">List of Subject</p>
+            <p className="f6 tc mt2 b bg-light-green br2 pa1">List of Subject</p>
             <table 
               className="bp3-html-table bp3-html-table-bordered
                bp3-html-table-striped bp3-interactive bp3-html-table-condensed w-100 ba b--light-silver"
@@ -162,17 +167,19 @@ export const SubjectSettings = observer(
                           className=""
                           position="auto"
                       >
-                        <Button 
-                          className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
-                            bg-animate noOutline"
-                          // onClick={(e: any) => {
-                          // }}
-                        >
-                          {/* <span className="bp3-icon-edit"/> */}
-                        </Button>
+                        <Tooltip content="Edit" position="auto">
+                          <Button 
+                            className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
+                              bg-animate noOutline"
+                            // onClick={(e: any) => {
+                            // }}
+                          >
+                            {/* <span className="bp3-icon-edit"/> */}
+                          </Button>
+                        </Tooltip>
                         <div className="w-100">
                           <div className="bp3-control-group pa3 subjectUpdateForm flex flex-column">
-                            <p className="mb2 b f5">Edit this Subject</p>
+                            <p className="mb2 b f5 bg-light-green br3 pa1">Edit Subject</p>
                             <div className="bp3-input-group w-100 subjectUpdateFormUpper">
                               <FormGroup
                                 label="Title"
@@ -205,7 +212,7 @@ export const SubjectSettings = observer(
                                 type="submit"
                                 className="bp3-button bp3-icon-inbox-update
                                   bp3-intent-success bp3-popover-dismiss pointer
-                                  br2 mv1 bg-animate w-100 noOutline"
+                                  br2Important mv1 bg-animate w-100 noOutline"
                               >
                               Update
                               </Button>
@@ -213,11 +220,13 @@ export const SubjectSettings = observer(
                           </div>
                         </div>
                       </Popover>
-                      <button 
-                        className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
-                        // onClick={(e: any) => {
-                        // }}
-                      />
+                      <Tooltip content="Delete" position="auto">
+                        <button 
+                          className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
+                          // onClick={(e: any) => {
+                          // }}
+                        />
+                        </Tooltip>
                     </div>
                   </td>
                 </tr>

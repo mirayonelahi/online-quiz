@@ -18,7 +18,7 @@ export const ExamSettingsTable = observer(
             <input type="text" className="bp3-input" placeholder="Search" />
             </div>
         </div>
-        <p className="f6 tc mt2 b">List of Subjects</p>
+        <p className="f6 tc mt2 b bg-light-green br2 pa1">List of Exams</p>
         <table 
             className="bp3-html-table bp3-html-table-bordered
             bp3-html-table-striped bp3-interactive bp3-html-table-condensed w-100 ba b--light-silver"

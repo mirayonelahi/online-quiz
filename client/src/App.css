@@ -3,6 +3,15 @@
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
 
+.width25vw{
+  width: 25vw;
+}
+.width35vw{
+  width: 35vw;
+}
+.paddingA0{
+  padding: 0px !important;
+}
 .f45{
   font-size: 45px !important;
 }

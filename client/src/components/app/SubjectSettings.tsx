@@ -84,7 +84,7 @@ export const SubjectSettings = observer(
                   <td className="f7">1</td>
                   <td className="f7">Botany</td>
                   <td className="f7">1102</td>
-                  <td className="f7 flex justify-center">
+                  <td className="f7 paddingA0 flex justify-center">
                     <div className="">
                       <Popover
                           interactionKind={PopoverInteractionKind.CLICK}
@@ -104,40 +104,41 @@ export const SubjectSettings = observer(
                           <div className="bp3-control-group pa3 subjectUpdateForm flex flex-column">
                             <p className="mb2 b f5">Edit this Subject</p>
                             <div className="bp3-input-group w-100 subjectUpdateFormUpper">
-                              <span className="bp3-icon bp3-icon-book"/>
-                              <input
-                                type="text"
-                                className="bp3-input"
-                                placeholder="Edited title"
-                                // value={
-                                // }
-                                // onChange={(e: any) => {
-                                // }} 
-                              />
+                              <FormGroup
+                                label="Title"
+                                labelFor="title"
+                              >
+                                <InputGroup
+                                  id="title"
+                                  placeholder="Zoology"
+                                  leftIcon="book"
+                                  className="width25vw"
+                                />
+                              </FormGroup>
                             </div>
                             <div className="subjectUpdateFormLower">
                               <div className="bp3-input-group w-100">
-                                <span className="bp3-icon bp3-icon-numerical"/>
-                                <input
-                                  type="text"
-                                  className="bp3-input w-100"
-                                  placeholder="Edited code"
-                                  // value={
-                                  // }
-                                  // onChange={(e: any) => {
-                                  // }} 
-                                />
-                                </div>
-                                <Button 
-                                  type="submit"
-                                  className="bp3-button bp3-icon-inbox-update
-                                    bp3-intent-success bp3-popover-dismiss pointer
-                                    br2 mv1 bg-animate w-100 noOutline"
-                                  // onClick={(e: any) => {
-                                  // }}
+                                <FormGroup
+                                  label="Code"
+                                  labelFor="code"
+                                  labelInfo="(required)"
                                 >
-                                Update
-                                </Button>
+                                  <InputGroup
+                                    id="code"
+                                    placeholder="1102"
+                                    leftIcon="numerical"
+                                    className="width25vw"
+                                  />
+                                </FormGroup>
+                              </div>
+                              <Button 
+                                type="submit"
+                                className="bp3-button bp3-icon-inbox-update
+                                  bp3-intent-success bp3-popover-dismiss pointer
+                                  br2 mv1 bg-animate w-100 noOutline"
+                              >
+                              Update
+                              </Button>
                             </div>
                           </div>
                         </div>

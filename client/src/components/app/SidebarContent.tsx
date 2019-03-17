@@ -9,6 +9,7 @@ import { Store } from 'src/models/Store';
 import { Home } from './Home';
 import { Sidebar } from './Sidebar';
 import { Controller } from 'src/models/Controller';
+import { LiveExam } from './LiveExam';
 
 export const SidebarContent = observer(
   (props: {
@@ -32,6 +33,12 @@ export const SidebarContent = observer(
                 exact={true}
                 strict={true}
                 render={() => <Home />}
+              />
+              <Route
+                path="/liveExam"
+                exact={true}
+                strict={true}
+                render={() => <LiveExam />}
               />
               <Route
                 path="/dataBank"

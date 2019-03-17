@@ -5,7 +5,9 @@ import {
   Elevation,
   FormGroup,
   Button,
-  InputGroup
+  InputGroup,
+  Popover,
+  PopoverInteractionKind
 } from '@blueprintjs/core';
 import { Subject } from 'src/models/Subject';
 
@@ -73,20 +75,80 @@ export const SubjectSettings = observer(
                 <tr>
                   <th className="f7">#</th>
                   <th className="f7">Subjects</th>
+                  <th className="f7">Code</th>
+                  <th className="f7"/>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="f7">1</td>
                   <td className="f7">Botany</td>
-                </tr>
-                <tr>
-                  <td className="f7">2</td>
-                  <td className="f7">Zoology</td>
-                </tr>
-                <tr>
-                  <td className="f7">3</td>
-                  <td className="f7">Higher Mathmatics</td>
+                  <td className="f7">1102</td>
+                  <td className="f7 flex justify-center">
+                    <div className="">
+                      <Popover
+                          interactionKind={PopoverInteractionKind.CLICK}
+                          popoverClassName=""
+                          className=""
+                          position="auto"
+                      >
+                        <Button 
+                          className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
+                            bg-animate noOutline"
+                          // onClick={(e: any) => {
+                          // }}
+                        >
+                          {/* <span className="bp3-icon-edit"/> */}
+                        </Button>
+                        <div className="w-100">
+                          <div className="bp3-control-group pa3 subjectUpdateForm flex flex-column">
+                            <p className="mb2 b f5">Edit this Subject</p>
+                            <div className="bp3-input-group w-100 subjectUpdateFormUpper">
+                              <span className="bp3-icon bp3-icon-book"/>
+                              <input
+                                type="text"
+                                className="bp3-input"
+                                placeholder="Edited title"
+                                // value={
+                                // }
+                                // onChange={(e: any) => {
+                                // }} 
+                              />
+                            </div>
+                            <div className="subjectUpdateFormLower">
+                              <div className="bp3-input-group w-100">
+                                <span className="bp3-icon bp3-icon-numerical"/>
+                                <input
+                                  type="text"
+                                  className="bp3-input w-100"
+                                  placeholder="Edited code"
+                                  // value={
+                                  // }
+                                  // onChange={(e: any) => {
+                                  // }} 
+                                />
+                                </div>
+                                <Button 
+                                  type="submit"
+                                  className="bp3-button bp3-icon-inbox-update
+                                    bp3-intent-success bp3-popover-dismiss pointer
+                                    br2 mv1 bg-animate w-100 noOutline"
+                                  // onClick={(e: any) => {
+                                  // }}
+                                >
+                                Update
+                                </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </Popover>
+                      <button 
+                        className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
+                        // onClick={(e: any) => {
+                        // }}
+                      />
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>

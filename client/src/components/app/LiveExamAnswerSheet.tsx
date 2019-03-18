@@ -8,15 +8,24 @@ export const LiveExamAnswerSheet = observer(
   () => {
     return (
       <Card interactive={true} elevation={Elevation.TWO} className="w-100">
-        <h2 className="f2 tc mt3 bg-light-green br3">This is Live Exam Paper</h2>
         <div className="answerSheet">
-          <div className="answerSheetHeader flex">
-            <p className="tl f6 w-30 ">Date: </p>
-            <div className="w-40">
-              <p className="tc f4 mb0 ">exam.title</p>
-              <p className="tc f6 mb3 ">exam.subject</p>
+          <div className="answerSheetHeader flex tc mt3 bg-light-green br3">
+            <div className="w-30 flex flex-column justify-center">
+              <div>
+                <p className="tl pl2 f6 mb0">Date: </p>
+                <p className="tl pl2 f6 mb0">Negative Mark: </p>
+              </div>
             </div>
-            <p className="tr f6 w-30 ">Duration: </p>
+            <div className="w-40 mv3">
+              <p className="tc f4 mb1 b">exam.title</p>
+              <p className="tc f6 mb0 b">exam.subject</p>
+            </div>
+            <div className="w-30 flex flex-column justify-center">
+            <div>
+              <p className="tr pr2 f6 mb0">Duration: </p>
+              <p className="tr pr2 f6 mb0">Time Left: </p>
+            </div>
+            </div>
           </div>
           <div className="answerSheetContent w-100 flex mv3">
             <div className="w-50 ph2">

@@ -4,7 +4,7 @@ import { Card, Elevation, Button } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 export const DataBank = observer(() => {
   return (
-    <Card interactive={true} elevation={Elevation.TWO} className="w-100">
+    <Card interactive={true} elevation={Elevation.ONE} className="w-100">
       <h2 className="f2 tc mt3 bg-light-green br3">Data Bank</h2>
       <div className="w-100 pa3">
         <div className="w-third pa3 dib">

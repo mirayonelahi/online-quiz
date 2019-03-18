@@ -10,6 +10,7 @@ import { Home } from './Home';
 import { Sidebar } from './Sidebar';
 import { Controller } from 'src/models/Controller';
 import { LiveExam } from './LiveExam';
+import { LiveExamAnswerSheet } from './LiveExamAnswerSheet';
 
 export const SidebarContent = observer(
   (props: {
@@ -39,6 +40,12 @@ export const SidebarContent = observer(
                 exact={true}
                 strict={true}
                 render={() => <LiveExam />}
+              />
+              <Route
+                path="/liveExamAnswerSheet"
+                exact={true}
+                strict={true}
+                render={() => <LiveExamAnswerSheet />}
               />
               <Route
                 path="/dataBank"

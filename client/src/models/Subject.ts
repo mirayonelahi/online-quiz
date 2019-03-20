@@ -10,6 +10,9 @@ export const Subject = types
     updated_at: types.maybe(types.string)
   })
   .actions(self => ({
+    setId(id: number) {
+      self.id = id;
+    },
     setTitle(title: string) {
       self.title = title;
     },
@@ -18,7 +21,8 @@ export const Subject = types
     },
   }))
   .actions(self => ({
-    setTitleCode(title: string, code: string) {
+    setIdTitleCode(id: number, title: string, code: string) {
+      self.setId(id);
       self.setTitle(title);
       self.setCode(code);
     },

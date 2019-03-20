@@ -54,6 +54,9 @@ export const SubjectSettingsDisplay = observer((props: { subjectStore: typeof Su
                             <Button 
                               className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
                                 bg-animate noOutline"
+                              onClick={(e: any) => {
+                                props.subjectStore.Subject.setIdTitleCode(subject.id, subject.title, subject.code);
+                              }}
                             />
                           </Tooltip>
                           <div className="w-100">
@@ -69,9 +72,9 @@ export const SubjectSettingsDisplay = observer((props: { subjectStore: typeof Su
                                     placeholder="Zoology"
                                     leftIcon="book"
                                     className="width25vw"
-                                    value={subject.title}
+                                    value={props.subjectStore.Subject.title}
                                     onChange={(e: any) => {
-                                      subject.setTitle(e.target.value);
+                                      props.subjectStore.Subject.setTitle(e.target.value);
                                     }}
                                   />
                                 </FormGroup>
@@ -88,9 +91,9 @@ export const SubjectSettingsDisplay = observer((props: { subjectStore: typeof Su
                                       placeholder="1102"
                                       leftIcon="numerical"
                                       className="width25vw"
-                                      value={subject.code}
+                                      value={props.subjectStore.Subject.code}
                                       onChange={(e: any) => {
-                                        subject.setCode(e.target.value);
+                                        props.subjectStore.Subject.setCode(e.target.value);
                                       }}
                                     />
                                   </FormGroup>
@@ -101,8 +104,7 @@ export const SubjectSettingsDisplay = observer((props: { subjectStore: typeof Su
                                     bp3-intent-success bp3-popover-dismiss pointer
                                     br2Important mv1 bg-animate w-100 noOutline"
                                   onClick={(e: any) => {
-                                    e.preventDefault();
-                                    subject.onUpdate(subject.id);
+                                    props.subjectStore.Subject.onUpdate(props.subjectStore.Subject.id!);
                                     props.subjectStore.getAll();
                                   }}
                                 >
@@ -116,7 +118,8 @@ export const SubjectSettingsDisplay = observer((props: { subjectStore: typeof Su
                           <button 
                             className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
                             onClick={(e: any) => {
-                              subject.onDelete(subject.id);
+                              e.preventDefault();
+                              props.subjectStore.Subject.onDelete(subject.id);
                               props.subjectStore.getAll();
                             }}
                           />

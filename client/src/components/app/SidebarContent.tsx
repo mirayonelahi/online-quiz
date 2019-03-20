@@ -60,7 +60,7 @@ export const SidebarContent = observer(
                 render={() =>
                    <ExamSettings
                     controller={props.controller}
-                    examStore={props.store.examStore} 
+                    // examStore={props.store.examStore} 
                    />}
               />
               <Route
@@ -73,7 +73,7 @@ export const SidebarContent = observer(
                 path="/subjectSettings"
                 exact={true}
                 strict={true}
-                render={() => <SubjectSettings subject={props.store.Subject} />}
+                render={() => <SubjectSettings subjectStore={props.store.subjectStore} />}
               />
             </Switch>
           </>

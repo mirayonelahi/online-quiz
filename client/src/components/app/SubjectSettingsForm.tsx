@@ -1,41 +1,84 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { FormGroup, InputGroup, Button, Popover, PopoverInteractionKind, Tooltip, FileInput } from '@blueprintjs/core';
+import { SubjectStore } from 'src/models/SubjectStore';
 
-export const SubjectSettingsForm = observer(() => {
+export const SubjectSettingsForm = observer((props: { subjectStore: typeof SubjectStore.Type }) => {
     return ( 
         <form className="w-50 subjectSettingsForm flex flex-column">
-          <div className="flex">
-            <div className="w-50 ph3">
-              <FormGroup
-                label="Title"
-                labelFor="title"
-                labelInfo="(required)"
-              >
-                <InputGroup
-                  id="title"
-                  placeholder="Zoology"
-                  leftIcon="book"
-                />
-              </FormGroup>
+          {props.subjectStore.tempSubjects.map((tempSubject: any, index: number) => (
+            <div key={index}>
+              <div className="subjectInputCard flex">
+                <div className="w-50 ph3">
+                  <FormGroup
+                    label="Title"
+                    labelFor="title"
+                    labelInfo="(required)"
+                  >
+                    <InputGroup
+                      id="title"
+                      placeholder="Zoology"
+                      leftIcon="book"
+                      rightElement={
+                        <Button
+                          intent="danger"
+                          minimal={true} 
+                          className={`${index > 0 ? 'bp3-icon-delete' : 'dn'}`}
+                          onClick={(e: any) => {
+                            if (index > 0) {
+                              e.preventDefault();
+                              props.subjectStore.deleteFromTempSubjects(index);
+                              console.log(props.subjectStore.tempSubjects.length);
+                            }
+                          }
+                          }
+                        />
+                      }
+                      value={tempSubject.title}
+                      onChange={(e: any) => {
+                        e.preventDefault();
+                        tempSubject.setTitle(e.target.value);
+                        if (props.subjectStore.tempSubjects[props.subjectStore.tempSubjects.length - 1].title !== '') {
+                          props.subjectStore.pushInTempSubjects();
+                          console.log(props.subjectStore.tempSubjects.length);
+                        }
+                      }}
+                    />
+                  </FormGroup>
+                </div>
+                <div className="w-50 ph3">
+                  <FormGroup
+                    label="Code"
+                    labelFor="code"
+                    labelInfo="(required)"
+                  >
+                    <InputGroup
+                      id="code"
+                      placeholder="1102"
+                      leftIcon="numerical"
+                      value={tempSubject.code}
+                      onChange={(e: any) => {
+                        e.preventDefault();
+                        tempSubject.setCode(e.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                </div>
+              </div>
             </div>
-            <div className="w-50 ph3">
-              <FormGroup
-                label="Code"
-                labelFor="code"
-                labelInfo="(required)"
-              >
-                <InputGroup
-                  id="code"
-                  placeholder="1102"
-                  leftIcon="numerical"
-                />
-              </FormGroup>
-            </div>
-          </div>
+          ))
+          }
           <div>
             <div className="w-100 ph3 flex">
-              <Button icon="add" fill={true} intent="success">
+              <Button
+                icon="add"
+                fill={true}
+                intent="success"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  props.subjectStore.save();
+                }}
+              >
                 Add Subjects
               </Button>
               <Popover

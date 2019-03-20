@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::apiResources(
     ['exams'=>'API\ExamController', 
      'questions'=>'API\QuestionController',
-     'results'=> 'API\ResultController'  ]
+     'results'=> 'API\ResultController',
+     'subjects'=> 'API\SubjectController'  ]
 );
 // Route::get('search/items/{field}/{query}','API\TaskController@search');

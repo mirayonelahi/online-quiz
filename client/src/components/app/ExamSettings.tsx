@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { ExamStore } from 'src/models/ExamStore';
 import {
   Card,
   Elevation,
@@ -17,7 +16,7 @@ import { Controller } from 'src/models/Controller';
 export const ExamSettings = observer(
   (props: {
     controller: typeof Controller.Type;
-    examStore: typeof ExamStore.Type;
+    // examStore: typeof ExamStore.Type;
   }) => {
     return (
       <Card className="w-100">

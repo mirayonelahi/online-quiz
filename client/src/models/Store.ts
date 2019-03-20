@@ -1,10 +1,8 @@
-import { Subject } from './Subject';
 import { types } from 'mobx-state-tree';
-import { ExamStore } from './ExamStore';
 import { Controller } from './Controller';
+import { SubjectStore } from './SubjectStore';
 
 export const Store = types.model('store', {
-  examStore: types.optional(ExamStore, {}),
-  Subject: types.optional(Subject, {}),
+  subjectStore: types.optional(SubjectStore, {}),
   controller: types.optional(Controller, {})
 });

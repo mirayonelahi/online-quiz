@@ -15,7 +15,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return Question::all();
+        return Question::with('subject')->get();
+        // $books = Question::with('subject')->get();
+        // dd($books->find(1)->subject->title);
     }
 
     /**
@@ -28,14 +30,9 @@ class QuestionController extends Controller
     {
         return Question::create([
             'title'=>$request['title'],
-            'option1'=>$request['option1'],
-            'option2'=>$request['option2'],
-            'option3'=>$request['option3'],
-            'option4'=>$request['option4'],
-            'correctAnswer'=>$request['correctAnswer'],
+            'answer'=>$request['answer'],
             'explanation'=>$request['explanation'],
-            'marks'=>$request['marks'],
-            'examId'=>$request['examId']
+            'subjectId'=>$request['subjectId']
         ]);
     }
 

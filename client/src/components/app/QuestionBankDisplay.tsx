@@ -1,13 +1,24 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import {
-   Card, Elevation, Popover, PopoverInteractionKind, Tooltip, Button, FormGroup, InputGroup
-   } from '@blueprintjs/core';
+  Card,
+  Elevation,
+  Popover,
+  PopoverInteractionKind,
+  Tooltip,
+  Button,
+  FormGroup,
+  InputGroup
+} from '@blueprintjs/core';
+import { QuestionStore } from 'src/models/QuestionStore';
 
 export const QuestionBankDisplay = observer(
-  () => {
+  (props: { questionStore: typeof QuestionStore.Type}) => {
     return (
-      <Card elevation={Elevation.ONE} className="w-50 quesBankDisplay overflow-auto pa2">
+      <Card
+        elevation={Elevation.ONE}
+        className="w-50 quesBankDisplay overflow-auto pa2"
+      >
         <div className="bp3-control-group">
           <div className="bp3-select">
             <select>
@@ -17,12 +28,12 @@ export const QuestionBankDisplay = observer(
             </select>
           </div>
           <div className="bp3-input-group bp3-fill">
-            <span className="bp3-icon bp3-icon-search"/>
+            <span className="bp3-icon bp3-icon-search" />
             <input type="text" className="bp3-input" placeholder="Search" />
           </div>
         </div>
         <p className="f6 tc mt2 b bg-light-green br2 pa1">List of Questions</p>
-        <table 
+        <table
           className="bp3-html-table bp3-html-table-bordered
             bp3-html-table-striped bp3-interactive bp3-html-table-condensed w-100 ba b--light-silver"
         >
@@ -33,108 +44,148 @@ export const QuestionBankDisplay = observer(
               <th className="f7">Answer</th>
               <th className="f7">Explanation</th>
               <th className="f7">Subject</th>
-              <th className="f7"/>
+              <th className="f7" />
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="f7">1</td>
-              <td className="f7">Higher Mathmatics</td>
-              <td className="f7">eta answer</td>
-              <td className="f7">5 is only divisible by 1 and 5</td>
-              <td className="f7">Botany</td>
-              <td className="f7 paddingA0 flex justify-center">
-                <div className="">
-                  <Popover
-                      interactionKind={PopoverInteractionKind.CLICK}
-                      popoverClassName=""
-                      className=""
-                      position="auto"
-                  >
-                    
-                    <Tooltip content="Edit" position="auto">
-                      <Button 
-                        className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
+            {props.questionStore.questions.map(
+              (question: any, index: number) => (
+                <tr>
+                  <td className="f7">{index}</td>
+                  <td className="f7">{question.title}</td>
+                  <td className="f7">{question.answer}</td>
+                  <td className="f7">{question.explanation}</td>
+                  <td className="f7">{question.subject.title}</td>
+                  <td className="f7 paddingA0 flex justify-center">
+                    <div className="">
+                      <Popover
+                        interactionKind={PopoverInteractionKind.CLICK}
+                        popoverClassName=""
+                        className=""
+                        position="auto"
+                      >
+                        <Tooltip content="Edit" position="auto">
+                          <Button
+                            className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
                           bg-animate noOutline"
-                      />
-                    </Tooltip>
-                    <div className="w-100">
-                      <div className="bp3-control-group pa3 questionUpdateForm flex flex-column">
-                        <p className="mb2 b f5 bg-light-green br3 pa1">Edit Question</p>
-                        <div className="bp3-input-group w-100 questionUpdateFormUpper">
-                          <FormGroup
-                            label="Question"
-                            labelFor="question"
-                          >
-                            <InputGroup
-                              id="question"
-                              placeholder="Whice one is prime number?"
-                              leftIcon="document"
-                              className="width35vw"
-                            />
-                          </FormGroup>
-                        </div>
-                        <div className="bp3-input-group w-100 questionUpdateFormUpper">
-                          <FormGroup
-                            label="Answer"
-                            labelFor="answer"
-                          >
-                            <InputGroup
-                              id="answer"
-                              placeholder="5"
-                              leftIcon="document-open"
-                              className="width35vw"
-                            />
-                          </FormGroup>
-                        </div>
-                        <div className="bp3-input-group w-100 questionUpdateFormUpper">
-                          <FormGroup
-                            label="Explanataion"
-                            labelFor="explanataion"
-                          >
-                            <InputGroup
-                              id="explanataion"
-                              placeholder="5 is only divisible by 1 and 5"
-                              leftIcon="geosearch"
-                              className="width35vw"
-                            />
-                          </FormGroup>
-                        </div>
-                        <div className="questionUpdateFormLower">
-                          <div className="bp3-input-group w-100">
-                            <FormGroup
-                              label="Subject"
-                              labelFor="subject"
-                            >
-                              <InputGroup
-                                id="subject"
-                                type="select"
-                                placeholder="Higher Mathmatics"
-                                leftIcon="book"
-                                className="width35vw"
-                              />
-                            </FormGroup>
-                          </div>
-                          <Button 
-                            type="submit"
-                            className="bp3-button bp3-icon-inbox-update
+                            onClick={(e: any) => {
+                              props.questionStore.Question.setIdTitleAnswerExplanationsubject(
+                                question.id,
+                                question.title,
+                                question.answer,
+                                question.explanataion,
+                                question.subject.id
+                              );
+                            }}
+                          />
+                        </Tooltip>
+                        <div className="w-100">
+                          <div className="bp3-control-group pa3 questionUpdateForm flex flex-column">
+                            <p className="mb2 b f5 bg-light-green br3 pa1">
+                              Edit Question
+                            </p>
+                            <div className="bp3-input-group w-100 questionUpdateFormUpper">
+                              <FormGroup label="Question" labelFor="question">
+                                <InputGroup
+                                  id="question"
+                                  placeholder="Whice one is prime number?"
+                                  leftIcon="document"
+                                  className="width35vw"
+                                  value={props.questionStore.Question.title}
+                                  onChange={(e: any) => {
+                                    props.questionStore.Question.setTitle(
+                                      e.target.value
+                                    );
+                                  }}
+                                />
+                              </FormGroup>
+                            </div>
+                            <div className="bp3-input-group w-100 questionUpdateFormUpper">
+                              <FormGroup label="Answer" labelFor="answer">
+                                <InputGroup
+                                  id="answer"
+                                  placeholder="5"
+                                  leftIcon="document-open"
+                                  className="width35vw"
+                                  value={props.questionStore.Question.answer}
+                                  onChange={(e: any) => {
+                                    props.questionStore.Question.setAnswer(
+                                      e.target.value
+                                    );
+                                  }}
+                                />
+                              </FormGroup>
+                            </div>
+                            <div className="bp3-input-group w-100 questionUpdateFormUpper">
+                              <FormGroup
+                                label="Explanation"
+                                labelFor="explanation"
+                              >
+                                <InputGroup
+                                  id="explanation"
+                                  placeholder="5 is only divisible by 1 and 5"
+                                  leftIcon="geosearch"
+                                  className="width35vw"
+                                  value={
+                                    props.questionStore.Question.explanation
+                                  }
+                                  onChange={(e: any) => {
+                                    props.questionStore.Question.setExplanation(
+                                      e.target.value
+                                    );
+                                  }}
+                                />
+                              </FormGroup>
+                            </div>
+                            <div className="questionUpdateFormLower">
+                              <div className="bp3-input-group w-100">
+                                <FormGroup label="Subject" labelFor="subject">
+                                  <div className="bp3-select .modifier">
+                                    <select
+                                      onChange={(e: any) => {
+                                        e.preventDefault();
+                                        props.questionStore.Question.setSubjectId(
+// tslint:disable-next-line: radix
+                                          parseInt(e.target.value)
+                                        );
+                                        console.log('test setSubjectId', e.target.value);
+                                      }}
+                                    >
+                                      {props.questionStore.questions.map(
+// tslint:disable-next-line: no-shadowed-variable
+                                        (question: any) => (
+                                          <option
+                                            key={question.subject.id}
+                                            value={question.subject.id}
+                                          >
+                                            {question.subject.title}
+                                          </option>
+                                        )
+                                      )}
+                                    </select>
+                                  </div>
+                                </FormGroup>
+                              </div>
+                              <Button
+                                type="submit"
+                                className="bp3-button bp3-icon-inbox-update
                               bp3-intent-success bp3-popover-dismiss pointer
                               br2Important mv1 bg-animate w-100 noOutline"
-                          >
-                          Update
-                          </Button>
+                              >
+                                Update
+                              </Button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      </Popover>
+                      <Tooltip content="Delete" position="auto">
+                        <button className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline" />
+                      </Tooltip>
                     </div>
-                  </Popover>
-                  <Tooltip content="Delete" position="auto">
-                    <button 
-                      className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
-                    />
-                  </Tooltip>
-                </div>
-              </td>
-            </tr>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </Card>

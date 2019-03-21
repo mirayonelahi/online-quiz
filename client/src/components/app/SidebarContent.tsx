@@ -13,21 +13,16 @@ import { LiveExam } from './LiveExam';
 import { LiveExamAnswerSheet } from './LiveExamAnswerSheet';
 
 export const SidebarContent = observer(
-  (props: {
-    controller: typeof Controller.Type;
-    store: typeof Store.Type;
-  }) => {
+  (props: { controller: typeof Controller.Type; store: typeof Store.Type }) => {
     return (
       <section
         className={`ph5 pv3 sidebarContentSection transitionAll ${
           props.controller.sidebarClose ? 'contentMl40' : ''
-          }`}
+        }`}
       >
         <BrowserRouter>
           <>
-            <Sidebar
-              controller={props.controller}
-            />
+            <Sidebar controller={props.controller} />
             <Switch>
               <Route
                 path="/"
@@ -57,23 +52,31 @@ export const SidebarContent = observer(
                 path="/examSettings"
                 exact={true}
                 strict={true}
-                render={() =>
-                   <ExamSettings
+                render={() => (
+                  <ExamSettings
                     controller={props.controller}
-                    // examStore={props.store.examStore} 
-                   />}
+                    // examStore={props.store.examStore}
+                  />
+                )}
               />
               <Route
                 path="/questionBank"
                 exact={true}
                 strict={true}
-                render={() => <QuestionBank />}
+                render={() => (
+                  <QuestionBank
+                    questionStore={props.store.questionStore}
+                    subjectStore={props.store.subjectStore}
+                  />
+                )}
               />
               <Route
                 path="/subjectSettings"
                 exact={true}
                 strict={true}
-                render={() => <SubjectSettings subjectStore={props.store.subjectStore} />}
+                render={() => (
+                  <SubjectSettings subjectStore={props.store.subjectStore} />
+                )}
               />
             </Switch>
           </>

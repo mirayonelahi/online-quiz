@@ -1,71 +1,139 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { FormGroup, InputGroup, Button, Popover, PopoverInteractionKind, Tooltip, FileInput } from '@blueprintjs/core';
+import {
+  FormGroup,
+  InputGroup,
+  Button,
+  Popover,
+  PopoverInteractionKind,
+  Tooltip,
+  FileInput
+} from '@blueprintjs/core';
+import { QuestionStore } from 'src/models/QuestionStore';
+import { SubjectStore } from 'src/models/SubjectStore';
 
 export const QuestionBankForm = observer(
-  () => {
+  (props: {
+    questionStore: typeof QuestionStore.Type;
+    subjectStore: typeof SubjectStore.Type;
+  }) => {
     return (
       <form className="w-50 questionBankForm">
-        <div>
-          <div className="w-50 ph3 dib">
-            <FormGroup
-              label="Question"
-              labelFor="question"
-              labelInfo="(required)"
-            >
-              <InputGroup
-                id="question"
-                placeholder="Whice one is prime number?"
-                leftIcon="document"
-              />
-            </FormGroup>
-          </div>
-          <div className="w-50 ph3 dib">
-            <FormGroup
-              label="Answer"
-              labelFor="answer"
-              labelInfo="(required)"
-            >
-              <InputGroup
-                id="answer"
-                placeholder="5"
-                leftIcon="document-open"
-              />
-            </FormGroup>
-          </div>
-        </div>
-        <div>
-          <div className="w-50 ph3 dib">
-            <FormGroup
-              label="Explanataion"
-              labelFor="explanataion"
-            >
-              <InputGroup
-                id="explanataion"
-                placeholder="5 is only divisible by 1 and 5"
-                leftIcon="geosearch"
-              />
-            </FormGroup>
-          </div>
-          <div className="w-50 ph3 dib">
-            <FormGroup
-              label="Subject"
-              labelFor="subject"
-            >
-              <InputGroup
-                id="subject"
-                type="select"
-                placeholder="Higher Mathmatics"
-                leftIcon="book"
-              />
-            </FormGroup>
-          </div>
-        </div>
+        {props.questionStore.tempQuestions.map(
+          (tempQuestions: any, index: number) => (
+            <div key={index}>
+              <div className="w-50 ph3 dib">
+                <FormGroup
+                  label="Question"
+                  labelFor="question"
+                  labelInfo="(required)"
+                >
+                  <InputGroup
+                    id="question"
+                    placeholder="Whice one is prime number?"
+                    leftIcon="document"
+                    rightElement={
+                      <Button
+                        intent="danger"
+                        minimal={true}
+                        className={`${index > 0 ? 'bp3-icon-delete' : 'dn'}`}
+                        onClick={(e: any) => {
+                          if (index > 0) {
+                            e.preventDefault();
+                            props.questionStore.deleteFromTempQuestions(index);
+                            console.log(
+                              props.questionStore.tempQuestions.length
+                            );
+                          }
+                        }}
+                      />
+                    }
+                    value={tempQuestions.title}
+                    onChange={(e: any) => {
+                      e.preventDefault();
+                      tempQuestions.setTitle(e.target.value);
+                      if (
+                        props.questionStore.tempQuestions[
+                          props.questionStore.tempQuestions.length - 1
+                        ].title !== ''
+                      ) {
+                        props.questionStore.pushInTempQuestions();
+                        console.log(props.questionStore.tempQuestions.length);
+                      }
+                    }}
+                  />
+                </FormGroup>
+              </div>
+              <div className="w-50 ph3 dib">
+                <FormGroup
+                  label="Answer"
+                  labelFor="answer"
+                  labelInfo="(required)"
+                >
+                  <InputGroup
+                    id="answer"
+                    placeholder="5"
+                    leftIcon="document-open"
+                    value={tempQuestions.answer}
+                    onChange={(e: any) => {
+                      e.preventDefault();
+                      tempQuestions.setAnswer(e.target.value);
+                    }}
+                  />
+                </FormGroup>
+              </div>
+
+              <div>
+                <div className="w-50 ph3 dib">
+                  <FormGroup label="Explanation" labelFor="explanataion">
+                    <InputGroup
+                      id="explanataion"
+                      placeholder="5 is only divisible by 1 and 5"
+                      leftIcon="geosearch"
+                      value={tempQuestions.explanation}
+                      onChange={(e: any) => {
+                        e.preventDefault();
+                        tempQuestions.setExplanation(e.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                </div>
+                <div className="w-50 ph3 dib">
+                  <FormGroup label="Subject" labelFor="subject">
+                    <div className="bp3-select .modifier">
+                      <select
+                        onChange={(e: any) => {
+                          e.preventDefault();
+// tslint:disable-next-line: radix
+                          tempQuestions.setSubjectId(parseInt(e.target.value));
+                          // console.log('test setSubjectId');
+                        }}
+                      >
+                        {props.subjectStore.subjects.map(subject => (
+                          <option
+                            key={subject.id}
+                            value={subject.id}
+                          >
+                            {subject.title}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </FormGroup>
+                </div>
+              </div>
+            </div>
+          )
+        )}
         <div className="w-100 ph3 flex">
           <Button
             icon="add"
             fill={true}
             intent="success"
+            onClick={(e: any) => {
+              e.preventDefault();
+              props.questionStore.save();
+            }}
           >
             Add Question
           </Button>
@@ -76,32 +144,31 @@ export const QuestionBankForm = observer(
             position="auto"
           >
             <Tooltip content="Import Questions" position="auto">
-              <Button 
+              <Button
                 className="bp3-button bp3-icon-import bp3-intent-primary bp3-popover-dismiss pointer
-                  bg-animate noOutline"
+                      bg-animate noOutline"
               />
             </Tooltip>
-              <div className="w-100">
-                <div className="bp3-control-group pa3 flex flex-column">
-                  <p className="mb2 b f5 bg-light-green br3 pa1">Import Questions</p>
-                  <div className="bp3-input-group w-100">
-                    <FormGroup
-                      label="File"
-                      labelFor="file"
-                    >
-                      <FileInput id="file" text="Browse" />
-                    </FormGroup>
-                  </div>
-                  <Button 
-                    type="submit"
-                    className="bp3-button bp3-icon-import
-                      bp3-intent-success bp3-popover-dismiss pointer
-                      br2Important bg-animate w-100 noOutline"
-                  > 
-                  Import
-                  </Button>
+            <div className="w-100">
+              <div className="bp3-control-group pa3 flex flex-column">
+                <p className="mb2 b f5 bg-light-green br3 pa1">
+                  Import Questions
+                </p>
+                <div className="bp3-input-group w-100">
+                  <FormGroup label="File" labelFor="file">
+                    <FileInput id="file" text="Browse" />
+                  </FormGroup>
                 </div>
+                <Button
+                  type="submit"
+                  className="bp3-button bp3-icon-import
+                          bp3-intent-success bp3-popover-dismiss pointer
+                          br2Important bg-animate w-100 noOutline"
+                >
+                  Import
+                </Button>
               </div>
+            </div>
           </Popover>
           <Popover
             interactionKind={PopoverInteractionKind.CLICK}
@@ -110,29 +177,28 @@ export const QuestionBankForm = observer(
             position="auto"
           >
             <Tooltip content="Export Questions" position="auto">
-              <Button 
+              <Button
                 className="bp3-button bp3-icon-export bp3-intent-primary bp3-popover-dismiss pointer
-                  bg-animate noOutline"
+                      bg-animate noOutline"
               />
             </Tooltip>
             <div className="w-100">
               <div className="bp3-control-group pa3 flex flex-column">
-                <p className="mb2 b f5 bg-light-green br3 pa1">Export Questions</p>
+                <p className="mb2 b f5 bg-light-green br3 pa1">
+                  Export Questions
+                </p>
                 <div className="bp3-input-group w-100">
-                  <FormGroup
-                      label="File"
-                      labelFor="file"
-                  >
+                  <FormGroup label="File" labelFor="file">
                     <FileInput id="file" text="Browse" />
                   </FormGroup>
                 </div>
-                <Button 
+                <Button
                   type="submit"
                   className="bp3-button bp3-icon-export
-                    bp3-intent-success bp3-popover-dismiss pointer
-                    br2Important bg-animate w-100 noOutline"
+                        bp3-intent-success bp3-popover-dismiss pointer
+                        br2Important bg-animate w-100 noOutline"
                 >
-                Export
+                  Export
                 </Button>
               </div>
             </div>

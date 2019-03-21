@@ -16,16 +16,11 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('option1');
-            $table->string('option2');
-            $table->string('option3');
-            $table->string('option4');
-            $table->string('correctAnswer');
+            $table->string('answer');
             $table->string('explanation');
-            $table->float('marks');
-            $table->integer('examId')->unsigned()->nullable();
-            $table->foreign('examId')
-            ->references('id')->on('exams')
+            $table->integer('subjectId')->unsigned()->nullable();
+            $table->foreign('subjectId')
+            ->references('id')->on('subjects')
             ->onDelete('cascade');
             $table->timestamps();
         });

@@ -1,17 +1,71 @@
-// import { types, getSnapshot } from 'mobx-state-tree';
-// import axios from 'axios';
+import { Subject } from './Subject';
+import { types, getSnapshot } from 'mobx-state-tree';
+import axios from 'axios';
 
-// export const Question = types.model('question', {
-//   id: types.maybe(types.number),
-//   title: types.optional(types.string, ''),
-//   option1: types.optional(types.string, ''),
-//   option2: types.optional(types.string, ''),
-//   option3: types.optional(types.string, ''),
-//   option4: types.optional(types.string, ''),
-//   correctAnswer: types.optional(types.string, ''),
-//   explanation: types.optional(types.string, ''),
-//   marks: types.optional(types.number, 1),
-//   examId: types.maybe(types.number),
-//   created_at: types.maybe(types.string),
-//   updated_at: types.maybe(types.string)
-// });
+export const Question = types
+  .model('question', {
+    id: types.maybe(types.number),
+    title: types.optional(types.string, ''),
+    answer: types.optional(types.string, ''),
+    explanation: types.optional(types.string, ''),
+    subjectId: types.maybe(types.number),
+    subject: types.optional(Subject, {}),
+    created_at: types.maybe(types.string),
+    updated_at: types.maybe(types.string)
+  })
+  .actions(self => ({
+    setId(id: number) {
+      self.id = id;
+    },
+    setTitle(title: string) {
+      self.title = title;
+    },
+    setAnswer(answer: string) {
+      self.answer = answer;
+    },
+    setExplanation(explanation: string) {
+      self.explanation = explanation;
+    },
+    setSubjectId(subjectId: any) {
+      self.subjectId = subjectId;
+    }
+  }))
+  .actions(self => ({
+    setIdTitleAnswerExplanationsubject(
+      id: number,
+      title: string,
+      answer: string,
+      explanation: string,
+      subjectId: number
+    ) {
+      self.setId(id);
+      self.setTitle(title);
+      self.setAnswer(answer);
+      self.setExplanation(explanation);
+      self.setSubjectId(subjectId);
+    },
+    onUpdate(id: number) {
+      axios
+        .put(`/api/questions/${id}`, getSnapshot(self), {
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    onDelete(id: number) {
+      axios
+        .delete(`/api/questions/${id}`, {
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }));

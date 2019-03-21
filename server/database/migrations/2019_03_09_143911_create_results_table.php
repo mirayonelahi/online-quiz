@@ -18,16 +18,13 @@ class CreateResultsTable extends Migration
             $table->string('givenAnswer');
             $table->string('correctAnswer');
             $table->string('marks');
-            $table->integer('examId')->unsigned()->nullable();
-            $table->foreign('examId')
-            ->references('id')->on('exams')
-            ->onDelete('cascade');
-            $table->integer('questionId')->unsigned()->nullable();
-            $table->foreign('questionId')
-            ->references('id')->on('questions')
-            ->onDelete('cascade');
+            // $table->integer('examId')->unsigned()->nullable();
             // $table->foreign('examId')
             // ->references('id')->on('exams')
+            // ->onDelete('cascade');
+            // $table->integer('questionId')->unsigned()->nullable();
+            // $table->foreign('questionId')
+            // ->references('id')->on('questions')
             // ->onDelete('cascade');
             $table->timestamps();
         });

@@ -17,7 +17,7 @@ export const QuestionBank = observer((
       <h2 className="f2 tc mt3 bg-light-green br3">Question Bank</h2>
       <Card interactive={true} elevation={Elevation.TWO} className="w-100 flex">
         <QuestionBankForm questionStore={props.questionStore} subjectStore={props.subjectStore} />
-        <QuestionBankDisplay questionStore={props.questionStore} />
+        <QuestionBankDisplay questionStore={props.questionStore} subjectStore={props.subjectStore} />
       </Card>
     </Card>
   );

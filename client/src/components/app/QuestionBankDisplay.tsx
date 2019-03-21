@@ -11,9 +11,10 @@ import {
   InputGroup
 } from '@blueprintjs/core';
 import { QuestionStore } from 'src/models/QuestionStore';
+import { SubjectStore } from 'src/models/SubjectStore';
 
 export const QuestionBankDisplay = observer(
-  (props: { questionStore: typeof QuestionStore.Type}) => {
+  (props: { questionStore: typeof QuestionStore.Type; subjectStore: typeof SubjectStore.Type }) => {
     return (
       <Card
         elevation={Elevation.ONE}
@@ -73,7 +74,7 @@ export const QuestionBankDisplay = observer(
                                 question.id,
                                 question.title,
                                 question.answer,
-                                question.explanataion,
+                                question.explanation,
                                 question.subject.id
                               );
                             }}
@@ -145,20 +146,23 @@ export const QuestionBankDisplay = observer(
                                       onChange={(e: any) => {
                                         e.preventDefault();
                                         props.questionStore.Question.setSubjectId(
-// tslint:disable-next-line: radix
+                                          // tslint:disable-next-line: radix
                                           parseInt(e.target.value)
                                         );
-                                        console.log('test setSubjectId', e.target.value);
+                                        console.log(
+                                          'test setSubjectId',
+                                          e.target.value
+                                        );
                                       }}
                                     >
-                                      {props.questionStore.questions.map(
-// tslint:disable-next-line: no-shadowed-variable
-                                        (question: any) => (
+                                      {props.subjectStore.subjects.map(
+                                        // tslint:disable-next-line: no-shadowed-variable
+                                        (subject: any) => (
                                           <option
-                                            key={question.subject.id}
-                                            value={question.subject.id}
+                                            key={subject.id}
+                                            value={subject.id}
                                           >
-                                            {question.subject.title}
+                                            {subject.title}
                                           </option>
                                         )
                                       )}
@@ -171,6 +175,12 @@ export const QuestionBankDisplay = observer(
                                 className="bp3-button bp3-icon-inbox-update
                               bp3-intent-success bp3-popover-dismiss pointer
                               br2Important mv1 bg-animate w-100 noOutline"
+                                onClick={(e: any) => {
+                                  props.questionStore.Question.onUpdate(
+                                    props.questionStore.Question.id!
+                                  );
+                                  props.questionStore.getAll();
+                                }}
                               >
                                 Update
                               </Button>
@@ -179,7 +189,14 @@ export const QuestionBankDisplay = observer(
                         </div>
                       </Popover>
                       <Tooltip content="Delete" position="auto">
-                        <button className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline" />
+                        <button
+                          className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
+                          onClick={(e: any) => {
+                            e.preventDefault();
+                            props.questionStore.Question.onDelete(question.id);
+                            props.questionStore.getAll();
+                          }}
+                        />
                       </Tooltip>
                     </div>
                   </td>

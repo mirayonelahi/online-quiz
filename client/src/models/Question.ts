@@ -9,7 +9,7 @@ export const Question = types
     answer: types.optional(types.string, ''),
     explanation: types.optional(types.string, ''),
     subjectId: types.maybe(types.number),
-    subject: types.optional(Subject, {}),
+    subject: types.maybe(Subject),
     created_at: types.maybe(types.string),
     updated_at: types.maybe(types.string)
   })

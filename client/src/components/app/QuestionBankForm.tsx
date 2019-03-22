@@ -100,7 +100,7 @@ export const QuestionBankForm = observer(
                 </div>
                 <div className="w-50 ph3 dib">
                   <FormGroup label="Subject" labelFor="subject">
-                    <div className="bp3-select .modifier">
+                    <div className="bp3-select bp3-fill">
                       <select
                         onChange={(e: any) => {
                           e.preventDefault();

@@ -5,8 +5,9 @@ export const Exam = types
   .model('exam', {
     id: types.maybe(types.number),
     title: types.optional(types.string, ''),
-    duration: types.optional(types.string, ''),
     subject: types.optional(types.string, ''),
+    negativeMark: types.optional(types.number, 0),
+    duration: types.optional(types.string, ''),
     date: types.optional(types.string, ''),
     created_at: types.maybe(types.string),
     updated_at: types.maybe(types.string)
@@ -16,6 +17,9 @@ export const Exam = types
     },
     setTitle(title: string) {
       self.title = title;
+    },
+    setNegativeMark(negativeMark: number) {
+      self.negativeMark = negativeMark;
     },
     setDuration(duration: string) {
       self.duration = duration;

@@ -33,9 +33,9 @@ export const SubjectSettingsForm = observer(
                         <Button
                           intent="danger"
                           minimal={true}
-                          className={`${index > 0 ? 'bp3-icon-delete' : 'dn'}`}
+                          className={`${index < props.subjectStore.tempSubjects.length - 1 ? 'bp3-icon-delete' : 'dn'}`}
                           onClick={(e: any) => {
-                            if (index > 0) {
+                            if (index < props.subjectStore.tempSubjects.length - 1) {
                               e.preventDefault();
                               props.subjectStore.deleteFromTempSubjects(index);
                               console.log(

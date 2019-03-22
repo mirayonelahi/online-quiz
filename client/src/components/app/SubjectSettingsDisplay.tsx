@@ -37,7 +37,7 @@ export const SubjectSettingsDisplay = observer((props: { subjectStore: typeof Su
           <tbody>
               {
                 props.subjectStore.subjects.map((subject: any, index: number) => (
-                  <tr>
+                  <tr key={index}>
                     <td className="f7">{index}</td>
                     <td className="f7">{subject.id}</td>
                     <td className="f7">{subject.title}</td>

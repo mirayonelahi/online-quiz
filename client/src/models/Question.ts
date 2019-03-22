@@ -8,7 +8,7 @@ export const Question = types
     title: types.optional(types.string, ''),
     answer: types.optional(types.string, ''),
     explanation: types.optional(types.string, ''),
-    subjectId: types.maybe(types.number),
+    subjectId: types.optional(types.number, 0),
     subject: types.maybe(Subject),
     created_at: types.maybe(types.string),
     updated_at: types.maybe(types.string)
@@ -26,12 +26,12 @@ export const Question = types
     setExplanation(explanation: string) {
       self.explanation = explanation;
     },
-    setSubjectId(subjectId: any) {
+    setSubjectId(subjectId: number) {
       self.subjectId = subjectId;
     }
   }))
   .actions(self => ({
-    setIdTitleAnswerExplanationsubject(
+    setIdTitleAnswerExplanationSubjectId(
       id: number,
       title: string,
       answer: string,

@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->string('answer');
             $table->string('explanation');
-            $table->integer('subjectId')->unsigned()->nullable();
+            $table->integer('subjectId')->unsigned();
             $table->foreign('subjectId')
             ->references('id')->on('subjects')
             ->onDelete('cascade');

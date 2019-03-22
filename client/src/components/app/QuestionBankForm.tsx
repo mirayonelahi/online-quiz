@@ -20,7 +20,7 @@ export const QuestionBankForm = observer(
     return (
       <form className="w-50 questionBankForm">
         {props.questionStore.tempQuestions.map(
-          (tempQuestions: any, index: number) => (
+          (tempQuestion: any, index: number) => (
             <div key={index}>
               <div className="w-50 ph3 dib">
                 <FormGroup
@@ -36,29 +36,25 @@ export const QuestionBankForm = observer(
                       <Button
                         intent="danger"
                         minimal={true}
-                        className={`${index > 0 ? 'bp3-icon-delete' : 'dn'}`}
+                        className={`${index < props.questionStore.tempQuestions.length - 1 ? 'bp3-icon-delete' : 'dn'}`}
                         onClick={(e: any) => {
-                          if (index > 0) {
+                          if (index < props.questionStore.tempQuestions.length - 1) {
                             e.preventDefault();
                             props.questionStore.deleteFromTempQuestions(index);
-                            console.log(
-                              props.questionStore.tempQuestions.length
-                            );
                           }
                         }}
                       />
                     }
-                    value={tempQuestions.title}
+                    value={tempQuestion.title}
                     onChange={(e: any) => {
                       e.preventDefault();
-                      tempQuestions.setTitle(e.target.value);
+                      tempQuestion.setTitle(e.target.value);
                       if (
                         props.questionStore.tempQuestions[
                           props.questionStore.tempQuestions.length - 1
                         ].title !== ''
                       ) {
                         props.questionStore.pushInTempQuestions();
-                        console.log(props.questionStore.tempQuestions.length);
                       }
                     }}
                   />
@@ -74,15 +70,14 @@ export const QuestionBankForm = observer(
                     id="answer"
                     placeholder="5"
                     leftIcon="document-open"
-                    value={tempQuestions.answer}
+                    value={tempQuestion.answer}
                     onChange={(e: any) => {
                       e.preventDefault();
-                      tempQuestions.setAnswer(e.target.value);
+                      tempQuestion.setAnswer(e.target.value);
                     }}
                   />
                 </FormGroup>
               </div>
-
               <div>
                 <div className="w-50 ph3 dib">
                   <FormGroup label="Explanation" labelFor="explanataion">
@@ -90,10 +85,10 @@ export const QuestionBankForm = observer(
                       id="explanataion"
                       placeholder="5 is only divisible by 1 and 5"
                       leftIcon="geosearch"
-                      value={tempQuestions.explanation}
+                      value={tempQuestion.explanation}
                       onChange={(e: any) => {
                         e.preventDefault();
-                        tempQuestions.setExplanation(e.target.value);
+                        tempQuestion.setExplanation(e.target.value);
                       }}
                     />
                   </FormGroup>
@@ -102,16 +97,15 @@ export const QuestionBankForm = observer(
                   <FormGroup label="Subject" labelFor="subject">
                     <div className="bp3-select bp3-fill">
                       <select
+                        value={tempQuestion.subjectId}
                         onChange={(e: any) => {
                           e.preventDefault();
-// tslint:disable-next-line: radix
-                          tempQuestions.setSubjectId(parseInt(e.target.value));
-                          // console.log('test setSubjectId');
+                          tempQuestion.setSubjectId(parseInt(e.target.value, 10));
                         }}
                       >
-                        {props.subjectStore.subjects.map(subject => (
+                        {props.subjectStore.subjects.map((subject: any, subjectIndex: number) => (
                           <option
-                            key={subject.id}
+                            key={subjectIndex}
                             value={subject.id}
                           >
                             {subject.title}

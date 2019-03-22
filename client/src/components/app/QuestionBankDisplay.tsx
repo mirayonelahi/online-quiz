@@ -51,7 +51,7 @@ export const QuestionBankDisplay = observer(
           <tbody>
             {props.questionStore.questions.map(
               (question: any, index: number) => (
-                <tr>
+                <tr key={index}>
                   <td className="f7">{index}</td>
                   <td className="f7">{question.title}</td>
                   <td className="f7">{question.answer}</td>
@@ -70,7 +70,7 @@ export const QuestionBankDisplay = observer(
                             className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
                           bg-animate noOutline"
                             onClick={(e: any) => {
-                              props.questionStore.Question.setIdTitleAnswerExplanationsubject(
+                              props.questionStore.Question.setIdTitleAnswerExplanationSubjectId(
                                 question.id,
                                 question.title,
                                 question.answer,
@@ -94,9 +94,7 @@ export const QuestionBankDisplay = observer(
                                   className="width35vw"
                                   value={props.questionStore.Question.title}
                                   onChange={(e: any) => {
-                                    props.questionStore.Question.setTitle(
-                                      e.target.value
-                                    );
+                                    props.questionStore.Question.setTitle(e.target.value);
                                   }}
                                 />
                               </FormGroup>
@@ -110,9 +108,7 @@ export const QuestionBankDisplay = observer(
                                   className="width35vw"
                                   value={props.questionStore.Question.answer}
                                   onChange={(e: any) => {
-                                    props.questionStore.Question.setAnswer(
-                                      e.target.value
-                                    );
+                                    props.questionStore.Question.setAnswer(e.target.value);
                                   }}
                                 />
                               </FormGroup>
@@ -131,9 +127,7 @@ export const QuestionBankDisplay = observer(
                                     props.questionStore.Question.explanation
                                   }
                                   onChange={(e: any) => {
-                                    props.questionStore.Question.setExplanation(
-                                      e.target.value
-                                    );
+                                    props.questionStore.Question.setExplanation(e.target.value);
                                   }}
                                 />
                               </FormGroup>
@@ -141,27 +135,16 @@ export const QuestionBankDisplay = observer(
                             <div className="questionUpdateFormLower">
                               <div className="bp3-input-group w-100">
                                 <FormGroup label="Subject" labelFor="subject">
-                                  <div className="bp3-select .modifier">
+                                  <div className="bp3-select bp3-fill">
                                     <select
+                                      value={props.questionStore.Question.subjectId}
                                       onChange={(e: any) => {
                                         e.preventDefault();
-                                        props.questionStore.Question.setSubjectId(
-                                          // tslint:disable-next-line: radix
-                                          parseInt(e.target.value)
-                                        );
-                                        console.log(
-                                          'test setSubjectId',
-                                          e.target.value
-                                        );
+                                        props.questionStore.Question.setSubjectId(parseInt(e.target.value, 10));
                                       }}
                                     >
-                                      {props.subjectStore.subjects.map(
-                                        // tslint:disable-next-line: no-shadowed-variable
-                                        (subject: any) => (
-                                          <option
-                                            key={subject.id}
-                                            value={subject.id}
-                                          >
+                                      {props.subjectStore.subjects.map((subject: any, subjectIndex: number) => (
+                                          <option key={subjectIndex} value={subject.id}>
                                             {subject.title}
                                           </option>
                                         )
@@ -176,9 +159,7 @@ export const QuestionBankDisplay = observer(
                               bp3-intent-success bp3-popover-dismiss pointer
                               br2Important mv1 bg-animate w-100 noOutline"
                                 onClick={(e: any) => {
-                                  props.questionStore.Question.onUpdate(
-                                    props.questionStore.Question.id!
-                                  );
+                                  props.questionStore.Question.onUpdate(props.questionStore.Question.id!);
                                   props.questionStore.getAll();
                                 }}
                               >

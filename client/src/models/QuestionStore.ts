@@ -40,9 +40,9 @@ export const QuestionStore = types.model('questiostore', {
 }))
 .actions(self => ({
   save() {
-    self.tempQuestions.map((tempQuestions: any, index: number) => {
+    self.tempQuestions.map((tempQuestion: any, index: number) => {
       if (index < self.tempQuestions.length - 1) {
-        axios.post('/api/questions', getSnapshot(tempQuestions), {
+        axios.post('/api/questions', getSnapshot(tempQuestion), {
           headers: { 'Content-Type': 'application/json' }
         }).then(res => {
           console.log('Questions saved: ', res.data);

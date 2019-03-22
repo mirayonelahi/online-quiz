@@ -103,6 +103,7 @@ export const QuestionBankForm = observer(
                           tempQuestion.setSubjectId(parseInt(e.target.value, 10));
                         }}
                       >
+                        <option value={0}>Click to Choose</option>
                         {props.subjectStore.subjects.map((subject: any, subjectIndex: number) => (
                           <option
                             key={subjectIndex}

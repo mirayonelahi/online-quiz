@@ -2,7 +2,6 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { InputGroup, FormGroup, Button } from '@blueprintjs/core';
 import { Store } from 'src/models/Store';
-import { ExamStore } from 'src/models/ExamStore';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
@@ -43,6 +42,7 @@ export const ExamSettingsQPaper = inject('store')(observer(
                           }
                         }}
                       >
+                        <option value={0}>Click to Choose</option>
                         {questionStore.questions.map((question: any, questionIndex: number) => (
                           <option
                             key={questionIndex}

@@ -1,4 +1,6 @@
 import { types } from 'mobx-state-tree';
+import { Exam } from './Exam';
+import { Question } from './Question';
 
 export const QuestionExam = types.model('questiostore', {
     id: types.maybe(types.number),
@@ -7,7 +9,11 @@ export const QuestionExam = types.model('questiostore', {
     option2: types.optional(types.string, ''),
     option3: types.optional(types.string, ''),
     option4: types.optional(types.string, ''),
-    examId: types.optional(types.number, 0)
+    examId: types.optional(types.number, 1),
+    question: types.maybe(Question),
+    exam: types.maybe(Exam),
+    created_at: types.maybe(types.string),
+    updated_at: types.maybe(types.string)
    })
    .actions(self => ({
      setQuestionId(questionId: number) {

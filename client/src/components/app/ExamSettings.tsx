@@ -16,7 +16,6 @@ import { Controller } from 'src/models/Controller';
 export const ExamSettings = observer(
   (props: {
     controller: typeof Controller.Type;
-    // examStore: typeof ExamStore.Type;
   }) => {
     return (
       <Card className="w-100">

@@ -1,3 +1,4 @@
+import { Subject } from './Subject';
 import { types, getSnapshot } from 'mobx-state-tree';
 import axios from 'axios';
 
@@ -5,13 +6,15 @@ export const Exam = types
   .model('exam', {
     id: types.maybe(types.number),
     title: types.optional(types.string, ''),
-    subject: types.optional(types.string, ''),
+    subjectId: types.optional(types.number, 0),
     negativeMark: types.optional(types.number, 0),
     duration: types.optional(types.string, ''),
     date: types.optional(types.string, ''),
+    subject: types.maybe(Subject),
     created_at: types.maybe(types.string),
     updated_at: types.maybe(types.string)
-  }).actions(self => ({
+  })
+  .actions(self => ({
     setId(id: number) {
       self.id = id;
     },
@@ -24,19 +27,21 @@ export const Exam = types
     setDuration(duration: string) {
       self.duration = duration;
     },
-    setSubject(subject: string) {
-      self.subject = subject;
+    setSubjectId(subjectId: number) {
+      self.subjectId = subjectId;
     },
     setDate(date: string) {
       self.date = date;
     }
   })).actions(self => ({
-    setIdTitleDurationSubjectDate(id: number, title: string, duration: string, subject: string, date: string) {
+    setIdTitleDurationSubjectIdDateNegativeMark(
+      id: number, title: string, duration: string, subjectId: number, date: string, negativeMark: number) {
       self.setId(id);
       self.setTitle(title);
       self.setDuration(duration);
-      self.setSubject(subject);
+      self.setSubjectId(subjectId);
       self.setDate(date);
+      self.setNegativeMark(negativeMark);
     }
   })).actions(self => ({
     save() {
@@ -46,7 +51,7 @@ export const Exam = types
         })
         .then(res => {
           console.log('data saved(Exam)');
-          self.setIdTitleDurationSubjectDate(0, '', '', '', '');
+          self.setIdTitleDurationSubjectIdDateNegativeMark(0, '', '', 0, '', 0);
         })
         .catch(err => {
           console.log(err);
@@ -58,7 +63,6 @@ export const Exam = types
           headers: { 'Content-Type': 'application/json' }
         })
         .then(res => {
-          console.log(res);
           console.log('data deleted(Exam)');
         })
         .catch(err => {
@@ -71,8 +75,8 @@ export const Exam = types
           headers: { 'Content-Type': 'application/json' }
         })
         .then(res => {
-          console.log('data updated(Exam)');
-          console.log(res);
+          console.log('data updated(Exam)=>');
+          self.setIdTitleDurationSubjectIdDateNegativeMark(0, '', '', 0, '', 0);
         })
         .catch(err => {
           console.log(err);

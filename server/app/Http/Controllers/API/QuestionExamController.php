@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Exam;
+use App\QuestionExam;
 
-class ExamController extends Controller
+class QuestionExamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,8 @@ class ExamController extends Controller
      */
     public function index()
     {
-        // $exam = Exam::all();
-        // $exam ->load('subject');
-        // return $exam;
-        return Exam::with('subject')->get();
+        // dd(QuestionExam::with(['question','exam'])->get()) ;
+        return QuestionExam::with(['question','exam'])->get();
     }
 
     /**
@@ -29,12 +27,13 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        return Exam::create([
-            'title'=>$request['title'],
-            'subjectId'=>$request['subjectId'],
-            'negativeMark'=>$request['negativeMark'],
-            'duration'=>$request['duration'],
-            'date'=>$request['date']
+        return QuestionExam::create([
+            'questionId'=>$request['questionId'],
+            'option1'=>$request['option1'],
+            'option2'=>$request['option2'],
+            'option3'=>$request['option3'],
+            'option4'=>$request['option4'],
+            'examId'=>$request['examId']
         ]);
     }
 
@@ -46,7 +45,7 @@ class ExamController extends Controller
      */
     public function show($id)
     {
-        return Exam::find($id);
+        return QuestionExam::find($id);
     }
 
     /**
@@ -58,9 +57,9 @@ class ExamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $exam=Exam::findOrfail($id);
-        $exam->update($request->all());
-        return $exam;
+        $questionExam=QuestionExam::findOrfail($id);
+        $questionExam->update($request->all());
+        return $questionExam;
     }
 
     /**
@@ -71,8 +70,8 @@ class ExamController extends Controller
      */
     public function destroy($id)
     {
-        $exam=Exam::findOrfail($id);
-        $exam->delete();
+        $questionExam=QuestionExam::findOrfail($id);
+        $questionExam->delete();
         return 204;
     }
 }

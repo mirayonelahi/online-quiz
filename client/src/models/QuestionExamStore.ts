@@ -3,6 +3,7 @@ import { QuestionExam } from './QuestionExam';
 import axios from 'axios';
 
 export const QuestionExamStore = types.model('questiostore', {
+  questionExam: types.optional(QuestionExam, {}),
   tempQuestionExams: types.optional(types.array(QuestionExam), [{}]),
   questionExams: types.optional(types.array(QuestionExam), [])
 })
@@ -43,10 +44,10 @@ export const QuestionExamStore = types.model('questiostore', {
     save() {
       self.tempQuestionExams.map((tempQuestionExam: any, index: number) => {
         if (index < self.tempQuestionExams.length - 1) {
-          axios.post('/api/questions', getSnapshot(tempQuestionExam), {
+          axios.post('/api/questionExams', getSnapshot(tempQuestionExam), {
             headers: { 'Content-Type': 'application/json' }
           }).then(res => {
-            console.log('Questions saved: ', res.data);
+            console.log('questionExams saved: ', res.data);
             self.resetTempQuestionExams();
             self.getAll();
           }).catch(err => {

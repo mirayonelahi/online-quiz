@@ -17,6 +17,7 @@ Route::apiResources(
     ['exams'=>'API\ExamController', 
      'questions'=>'API\QuestionController',
      'results'=> 'API\ResultController',
-     'subjects'=> 'API\SubjectController'  ]
+     'subjects'=> 'API\SubjectController',
+     'questionExams'=> 'API\QuestionExamController'  ]
 );
 // Route::get('search/items/{field}/{query}','API\TaskController@search');

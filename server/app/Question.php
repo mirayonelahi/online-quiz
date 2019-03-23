@@ -12,4 +12,8 @@ class Question extends Model
     {
         return $this->belongsTo('App\Subject','subjectId');
     }
+    public function questionExams()
+    {
+        return $this->hasMany('App\QuestionExam');
+    }
 }

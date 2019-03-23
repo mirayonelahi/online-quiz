@@ -53,10 +53,7 @@ export const SidebarContent = observer(
                 exact={true}
                 strict={true}
                 render={() => (
-                  <ExamSettings
-                    controller={props.controller}
-                    // examStore={props.store.examStore}
-                  />
+                  <ExamSettings />
                 )}
               />
               <Route

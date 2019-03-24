@@ -19,11 +19,11 @@ export const ExamStore = types
           headers: { 'content-Type': 'application/json' }
         })
         .then(res => {
-          console.log('getAll(examStore) response->', res.data);
+          console.log('getAll(exams) response->', res.data);
           self.setExams(res.data);
         })
         .catch(err => {
-          console.log('getAll(examStore) error->', err);
+          console.log('getAll(exams) error->', err);
         });
     }
   }))

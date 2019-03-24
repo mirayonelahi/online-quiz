@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Exam;
+use DB;
 
 class ExamController extends Controller
 {
@@ -18,6 +19,7 @@ class ExamController extends Controller
         // $exam = Exam::all();
         // $exam ->load('subject');
         // return $exam;
+        DB::update("ALTER TABLE exams AUTO_INCREMENT = 1;");
         return Exam::with('subject')->get();
     }
 

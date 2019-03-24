@@ -28,9 +28,19 @@ export const QuestionExamForm = inject('store')(
                         if (examStore.exam.id! > 0) {
                           tempQuestionExam.setExamId(examStore.exam.id);
                         } else {
-                          tempQuestionExam.setExamIdPlus1(
-                            examStore.exams[examStore.exams.length - 1].id
-                          );
+                          if (examStore.exam.id! === 0) {
+                            tempQuestionExam.setExamIdPlus1(
+                              examStore.exams[examStore.exams.length - 1].id
+                            );
+                          } else if (examStore.exam.id === undefined || null) {
+                            if (examStore.exams.length === 0) {
+                              tempQuestionExam.setExamId(1);
+                            } else if (examStore.exams.length !== 0) {
+                              tempQuestionExam.setExamIdPlus1(
+                                examStore.exams[examStore.exams.length - 1].id
+                              );
+                            }
+                          }
                         }
 
                         if (

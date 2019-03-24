@@ -5,9 +5,6 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Result;
-// use App\Http\Resources\TaskCollection;
-// use DateTime;
-// use Carbon\Carbon;
 
 class ResultController extends Controller
 {
@@ -18,19 +15,15 @@ class ResultController extends Controller
      */
     public function index()
     {
-           return Result::all();
-        // $allTasks= Task::orderBy('id','desc')->paginate(1000);
-        // return new TaskCollection($allTasks);
+           return Result::with(['questionExam','questionExam.exam','questionExam.question','questionExam.exam.subject:id,title'])->get();
     }
    
     public function store(Request $request)
     {   
         return Result::create([
         'givenAnswer'=>$request['givenAnswer'],
-        'correctAnswer'=>$request['correctAnswer'],
-        'examId'=>$request['examId'],
-        'questionId'=>$request['questionId'],
-        'marks'=>$request['marks']
+        'marks'=>$request['marks'],
+        'questionExamId'=>$request['questionExamId']
     ]);
     }
 

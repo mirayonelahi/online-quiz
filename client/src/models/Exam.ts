@@ -9,7 +9,7 @@ export const Exam = types
     subjectId: types.optional(types.number, 0),
     negativeMark: types.optional(types.number, 0),
     duration: types.optional(types.string, ''),
-    date: types.optional(types.string, ''),
+    date: types.maybeNull(types.string),
     subject: types.maybe(Subject),
     created_at: types.maybe(types.string),
     updated_at: types.maybe(types.string)

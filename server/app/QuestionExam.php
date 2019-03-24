@@ -16,4 +16,8 @@ class QuestionExam extends Model
     {
         return $this->belongsTo('App\Exam','examId');
     }
+    public function result()
+    {
+        return $this->belongsTo('App\Result');
+    }
 }

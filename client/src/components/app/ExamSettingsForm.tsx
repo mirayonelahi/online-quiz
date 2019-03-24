@@ -107,7 +107,7 @@ export const ExamSettingsForm = inject('store')(
             <Datetime
               dateFormat="YYYY-MM-DD"
               timeFormat={false}
-              value={examStore.exam.date}
+              value={examStore.exam.date!}
               onChange={(e: any) => {
                 // console.log('event', moment(e._d).format('YYYY-MM-DD HH:mm:ss'));
                 // e.preventDefault();

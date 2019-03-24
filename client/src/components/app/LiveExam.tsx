@@ -1,35 +1,45 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
-import {
-  Card,
-  Elevation,
-  Button
-} from '@blueprintjs/core';
+import { observer, inject } from 'mobx-react';
+import { Card, Elevation } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
+import { Store } from 'src/models/Store';
 
-export const LiveExam = observer(
-  () => {
+interface InjecttedPageProps {
+  store?: typeof Store.Type;
+}
+
+export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => {
+    const { examStore } = props.store!;
     return (
       <Card className="w-100">
         <h2 className="f2 tc mt3 bg-light-green br3">Live Exam</h2>
-        <Card interactive={true} elevation={Elevation.ONE} className="w-100">
-          <p className="f5 b">Subject Name</p>
-          <div className="liveExamButtonGroup">
-            <Button 
-              className="bp3-button pointer
-                bg-animate noOutline pa3"
+        <div className="liveExamButtonGroup w-100 flex flex-wrap">
+          {examStore.exams.map((exam: any, index: number) => (
+            <Card
+              key={index}
+              interactive={true}
+              elevation={Elevation.ONE}
+              className="pointer noOutline pa3 ma3"
             >
-              <Link to="/liveExamAnswerSheet" className="sidebarLinks">
-                <p className="b">Exam Title</p>
-                <p>Subject</p>
-                <p>Negative Marking</p>
-                <p>Date</p>
-                <p className="mb0">Duration</p>
+              <Link
+                to="/liveExamAnswerSheet"
+                className="sidebarLinks"
+                onClick={(e: any) => {
+                  examStore.exam.setIdTitleDurationSubjectIdDateNegativeMark(
+                    exam.id, exam.title, exam.duration, exam.subjectId, exam.date, exam.negativeMark
+                    );
+                }}
+              >
+                <p className="b tl">Exam: {exam.title}</p>
+                <p className="tl">Subject: {exam.subject.title}</p>
+                <p className="tl">Negative Mark: {exam.negativeMark}</p>
+                <p className="tl">Date: {exam.date}</p>
+                <p className="mb0 tl">Duration {exam.duration}</p>
               </Link>
-            </Button>
-          </div>
-        </Card>
+            </Card>
+          ))}
+        </div>
       </Card>
     );
-  }
+  })
 );

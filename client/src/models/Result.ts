@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const Result = types.model('result', {
   id: types.maybe(types.number),
-  givenAnswer: types.optional(types.string, ''),
+  givenAnswer: types.maybeNull(types.string),
   marks: types.optional(types.number, 0),
   questionExamId: types.maybe(types.number),
   created_at: types.maybe(types.string),

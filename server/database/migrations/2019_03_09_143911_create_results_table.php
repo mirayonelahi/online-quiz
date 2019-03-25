@@ -15,7 +15,7 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('givenAnswer');
+            $table->string('givenAnswer')->nullable();
             $table->float('marks');
             $table->integer('questionExamId')->unsigned();
             $table->foreign('questionExamId')

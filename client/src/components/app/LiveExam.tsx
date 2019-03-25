@@ -9,7 +9,7 @@ interface InjecttedPageProps {
 }
 
 export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => {
-    const { examStore } = props.store!;
+    const { examStore, questionExamStore, resultStore } = props.store!;
     return (
       <Card className="w-100">
         <h2 className="f2 tc mt3 bg-light-green br3">Live Exam</h2>
@@ -21,13 +21,17 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
               elevation={Elevation.ONE}
               className="pointer noOutline pa3 ma3"
             >
+            {console.log('Card exam->', exam)}
               <Link
                 to="/liveExamAnswerSheet"
                 className="sidebarLinks"
                 onClick={(e: any) => {
-                  examStore.exam.setIdTitleDurationSubjectIdDateNegativeMark(
-                    exam.id, exam.title, exam.duration, exam.subjectId, exam.date, exam.negativeMark
-                    );
+                  examStore.exam.setIdTitleDurationSubjectIdDateNegativeMarkSubject(
+                    exam.id, exam.title, exam.duration, exam.subjectId, exam.date, exam.negativeMark, exam.subject
+                  );
+                  resultStore.pushInTempResults(questionExamStore.questionExams.filter(
+                    (questionExam: any) => questionExam.examId === examStore.exam.id
+                  ).length);
                 }}
               >
                 <p className="b tl">Exam: {exam.title}</p>

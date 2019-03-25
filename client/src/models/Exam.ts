@@ -32,18 +32,49 @@ export const Exam = types
     },
     setDate(date: string) {
       self.date = date;
+    },
+    setSubject(subject: any) {
+      // self.subject = subject;
+      let tempSubject = {...subject};
+      self.subject = tempSubject;
+      console.log('setSubject()->', self.subject);
     }
-  })).actions(self => ({
+  }))
+  .actions(self => ({
     setIdTitleDurationSubjectIdDateNegativeMark(
-      id: number, title: string, duration: string, subjectId: number, date: string, negativeMark: number) {
+      id: number,
+      title: string,
+      duration: string,
+      subjectId: number,
+      date: string,
+      negativeMark: number
+    ) {
       self.setId(id);
       self.setTitle(title);
       self.setDuration(duration);
       self.setSubjectId(subjectId);
       self.setDate(date);
       self.setNegativeMark(negativeMark);
+    },
+    setIdTitleDurationSubjectIdDateNegativeMarkSubject(
+      id: number,
+      title: string,
+      duration: string,
+      subjectId: number,
+      date: string,
+      negativeMark: number,
+      subject: any
+    ) {
+      self.setId(id);
+      self.setTitle(title);
+      self.setDuration(duration);
+      self.setSubjectId(subjectId);
+      self.setDate(date);
+      self.setNegativeMark(negativeMark);
+      self.setSubject(subject);
     }
-  })).actions(self => ({
+  }))
+  .actions(self => ({
     save() {
       axios
         .post('/api/exams', getSnapshot(self), {

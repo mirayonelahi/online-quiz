@@ -11,6 +11,7 @@ import { Sidebar } from './Sidebar';
 import { Controller } from 'src/models/Controller';
 import { LiveExam } from './LiveExam';
 import { LiveExamAnswerSheet } from './LiveExamAnswerSheet';
+import { LiveExamResultSheet } from './LiveExamResultSheet';
 
 export const SidebarContent = observer(
   (props: { controller: typeof Controller.Type; store: typeof Store.Type }) => {
@@ -41,6 +42,12 @@ export const SidebarContent = observer(
                 exact={true}
                 strict={true}
                 render={() => <LiveExamAnswerSheet />}
+              />
+              <Route
+                path="/liveExamResultSheet"
+                exact={true}
+                strict={true}
+                render={() => <LiveExamResultSheet />}
               />
               <Route
                 path="/dataBank"

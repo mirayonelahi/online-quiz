@@ -2,13 +2,12 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Card, Button, Elevation, RadioGroup, Radio } from '@blueprintjs/core';
 import { Store } from 'src/models/Store';
-import { Link } from 'react-router-dom';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
 }
 
-export const LiveExamAnswerSheet = inject('store')(
+export const LiveExamResultSheet = inject('store')(
   observer((props: InjecttedPageProps) => {
     const { examStore, questionExamStore, resultStore } = props.store!;
     return (
@@ -16,23 +15,21 @@ export const LiveExamAnswerSheet = inject('store')(
         <div className="answerSheet">
           <div className="answerSheetHeader flex tc mt3 bg-light-green br3">
             <div className="w-30 flex flex-column justify-center">
-              <div className="mv3">
-                <p className="tl pl2 f6 mb0">Subject: {examStore.exam.subject!.title}</p>
+              <div>
+                <p className="tl pl2 f6 mb0">Date: {examStore.exam.date}</p>
                 <p className="tl pl2 f6 mb0">
                   Negative Mark: {examStore.exam.negativeMark}
                 </p>
-                <p className="tl pl2 f6 mb0">
-                  Total: {questionExamStore.questionExams.filter((questionExam: any) =>
-                      questionExam.examId === examStore.exam.id).length}
-                </p>
               </div>
             </div>
-            <div className="w-40 flex flex-column justify-center">
-              <p className="tc f3 mb1 b">{examStore.exam.title}</p>
+            <div className="w-40 mv3">
+              <p className="tc f4 mb1 b">{examStore.exam.title}</p>
+              {/* <p className="tc f6 mb0 b">
+                exam.subject {examStore.exam.subject!.title}
+              </p> */}
             </div>
             <div className="w-30 flex flex-column justify-center">
-              <div className="mv3">
-                <p className="tr pr2 f6 mb0">Date: {examStore.exam.date}</p>
+              <div>
                 <p className="tr pr2 f6 mb0">
                   Duration: {examStore.exam.duration}
                 </p>
@@ -75,20 +72,18 @@ export const LiveExamAnswerSheet = inject('store')(
             </div>
           </div>
         </div>
-        <Link to="/liveExamResultSheet" className="sidebarLinks">
-          <Button
-            icon="manually-entered-data"
-            fill={true}
-            intent="success"
-            className="answerSheetButton"
-            onClick={(e: any) => {
-              e.preventDefault();
-              resultStore.save();
-            }}
-          >
-            Submit Paper
-          </Button>
-        </Link>
+        <Button
+          icon="manually-entered-data"
+          fill={true}
+          intent="success"
+          className="answerSheetButton"
+          onClick={(e: any) => {
+            e.preventDefault();
+            resultStore.save();
+          }}
+        >
+          Submit Paper
+        </Button>
       </Card>
     );
   })

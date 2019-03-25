@@ -48,13 +48,13 @@ export const QuestionExamStore = types.model('questiostore', {
             headers: { 'Content-Type': 'application/json' }
           }).then(res => {
             console.log('questionExams saved: ', res.data);
-            self.resetTempQuestionExams();
-            self.getAll();
           }).catch(err => {
             console.log(err);
           });
         }
       });
+      self.resetTempQuestionExams();
+      self.getAll();
     },
   }))
   .actions(self => ({

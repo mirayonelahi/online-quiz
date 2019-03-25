@@ -46,13 +46,13 @@ export const QuestionStore = types.model('questiostore', {
           headers: { 'Content-Type': 'application/json' }
         }).then(res => {
           console.log('Questions saved: ', res.data);
-          self.resetTempQuestions();
-          self.getAll();
         }).catch(err => {
           console.log(err);
         });
       }
     });
+    self.resetTempQuestions();
+    self.getAll();
   },
 }))
 .actions(self => ({

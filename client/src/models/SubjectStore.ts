@@ -47,13 +47,13 @@ export const SubjectStore = types
             headers: { 'Content-Type': 'application/json' }
           }).then(res => {
             console.log('Subject saved: ', res.data);
-            self.resetTempSubjects();
-            self.getAll();
           }).catch(err => {
             console.log(err);
           });
         }
       });
+      self.resetTempSubjects();
+      self.getAll();
     },
   }))
   .actions(self => ({

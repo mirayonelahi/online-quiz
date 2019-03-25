@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Card, Button, Elevation, RadioGroup, Radio } from '@blueprintjs/core';
+import { Card, Elevation, RadioGroup, Radio } from '@blueprintjs/core';
 import { Store } from 'src/models/Store';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ export const LiveExamAnswerSheet = inject('store')(
           <div className="answerSheetHeader flex tc mt3 bg-light-green br3">
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
-                <p className="tl pl2 f6 mb0">Subject: {examStore.exam.subject!.title}</p>
                 <p className="tl pl2 f6 mb0">
                   Negative Mark: {examStore.exam.negativeMark}
                 </p>
@@ -27,8 +26,10 @@ export const LiveExamAnswerSheet = inject('store')(
                 </p>
               </div>
             </div>
-            <div className="w-40 flex flex-column justify-center">
+            <div className="w-40 mv2 flex flex-column justify-center">
               <p className="tc f3 mb1 b">{examStore.exam.title}</p>
+              <p className="tc f6 mb1">Subject: {examStore.exam.subject!.title}</p>
+              <p className="tc f6 mb1">Time Left: </p>
             </div>
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
@@ -36,7 +37,6 @@ export const LiveExamAnswerSheet = inject('store')(
                 <p className="tr pr2 f6 mb0">
                   Duration: {examStore.exam.duration}
                 </p>
-                <p className="tr pr2 f6 mb0">Time Left: </p>
               </div>
             </div>
           </div>
@@ -49,11 +49,11 @@ export const LiveExamAnswerSheet = inject('store')(
                 )
                 .map((questionExam: any, index: number) => (
                   <Card key={index} className="pa3 ma2 w-48">
-                    {resultStore.tempResults[index].setQuestionExamId(questionExam.id!)}
+                    {resultStore.tempResults[index].setQuestionExamId(parseInt(questionExam.id!, 10))}
+                    {resultStore.tempResults[index].setExamId(parseInt(questionExam.examId!, 10))}
                     <p className="f6 b"><span>{index + 1}. </span> {questionExam.question.title}</p>
                     <RadioGroup
                       onChange={(e: any) => {
-                        resultStore.getAll();
                         resultStore.tempResults[index].setGivenAnswer(e.currentTarget.value);
                         if (resultStore.tempResults[index].givenAnswer === '') {
                           resultStore.tempResults[index].setMarks(0);
@@ -75,19 +75,15 @@ export const LiveExamAnswerSheet = inject('store')(
             </div>
           </div>
         </div>
-        <Link to="/liveExamResultSheet" className="sidebarLinks">
-          <Button
-            icon="manually-entered-data"
-            fill={true}
-            intent="success"
-            className="answerSheetButton"
-            onClick={(e: any) => {
-              e.preventDefault();
-              resultStore.save();
-            }}
-          >
-            Submit Paper
-          </Button>
+        <Link
+          to="/liveExamResultSheet"
+          className="sidebarLinks answerSheetButton bp3-button
+           bp3-icon-manually-entered-data bp3-fill bp3-intent-success"
+          onClick={(e: any) => {
+            resultStore.save();
+          }}
+        >
+        Submit Paper
         </Link>
       </Card>
     );

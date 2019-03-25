@@ -8,11 +8,12 @@ interface InjecttedPageProps {
   store?: typeof Store.Type;
 }
 
-export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => {
+export const LiveExamResult = inject('store')(
+  observer((props: InjecttedPageProps) => {
     const { examStore, questionExamStore, resultStore } = props.store!;
     return (
       <Card className="w-100">
-        <h2 className="f2 tc mt3 bg-light-green br3">Live Exam</h2>
+        <h2 className="f2 tc mt3 bg-light-green br3">Result</h2>
         <div className="liveExamButtonGroup w-100 flex flex-wrap">
           {examStore.exams.map((exam: any, index: number) => (
             <Card
@@ -27,11 +28,20 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
                 onClick={(e: any) => {
                   // resultStore.resetTempResults();
                   examStore.exam.setIdTitleDurationSubjectIdDateNegativeMarkSubject(
-                    exam.id, exam.title, exam.duration, exam.subjectId, exam.date, exam.negativeMark, exam.subject
+                    exam.id,
+                    exam.title,
+                    exam.duration,
+                    exam.subjectId,
+                    exam.date,
+                    exam.negativeMark,
+                    exam.subject
                   );
-                  resultStore.pushInTempResults(questionExamStore.questionExams.filter(
-                    (questionExam: any) => questionExam.examId === examStore.exam.id
-                  ).length);
+                  resultStore.pushInTempResults(
+                    questionExamStore.questionExams.filter(
+                      (questionExam: any) =>
+                        questionExam.examId === examStore.exam.id
+                    ).length
+                  );
                 }}
               >
                 <p className="b tl">Exam: {exam.title}</p>

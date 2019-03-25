@@ -34,10 +34,8 @@ export const Exam = types
       self.date = date;
     },
     setSubject(subject: any) {
-      // self.subject = subject;
       let tempSubject = {...subject};
       self.subject = tempSubject;
-      console.log('setSubject()->', self.subject);
     }
   }))
   .actions(self => ({

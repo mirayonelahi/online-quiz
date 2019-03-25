@@ -15,7 +15,7 @@ export const ResultStore = types
   }))
   .actions(self => ({
     resetTempResults() {
-      self.setResults([]);
+      self.tempResults.splice(0, self.tempResults.length);
     },
     pushInTempResults(amount: number) {
       for (let i = 0; i < amount; i++) {

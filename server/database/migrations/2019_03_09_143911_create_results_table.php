@@ -21,6 +21,10 @@ class CreateResultsTable extends Migration
             $table->foreign('questionExamId')
             ->references('id')->on('question_exams')
             ->onDelete('cascade');
+            $table->integer('examId')->unsigned();
+            $table->foreign('examId')
+            ->references('id')->on('exams')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

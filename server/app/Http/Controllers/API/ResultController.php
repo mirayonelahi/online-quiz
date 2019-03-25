@@ -15,7 +15,7 @@ class ResultController extends Controller
      */
     public function index()
     {
-           return Result::with(['questionExam','questionExam.exam','questionExam.question','questionExam.exam.subject:id,title'])->get();
+           return Result::with(['questionExam','questionExam.exam','questionExam.question','questionExam.exam.subject:id,title','exam'])->get();
     }
    
     public function store(Request $request)
@@ -23,7 +23,8 @@ class ResultController extends Controller
         return Result::create([
         'givenAnswer'=>$request['givenAnswer'],
         'marks'=>$request['marks'],
-        'questionExamId'=>$request['questionExamId']
+        'questionExamId'=>$request['questionExamId'],
+        'examId'=>$request['examId'],
     ]);
     }
 

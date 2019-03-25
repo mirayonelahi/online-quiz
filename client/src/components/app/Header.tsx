@@ -16,7 +16,7 @@ export const Header = observer(
               props.controller.toggleSidebarClose(props.controller.sidebarClose);
             }}
           />
-          <div className="bp3-navbar-heading f4 ml1">YourTodo</div>
+          <div className="bp3-navbar-heading f4 ml1">Online Quiz</div>
         </div>
         <div className="bp3-navbar-group bp3-align-right">
           <button className="bp3-button bp3-minimal bp3-icon-home">

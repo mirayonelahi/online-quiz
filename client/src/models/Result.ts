@@ -1,11 +1,16 @@
 import { types, getSnapshot } from 'mobx-state-tree';
 import axios from 'axios';
+import { QuestionExam } from './QuestionExam';
+import { Exam } from './Exam';
 
 export const Result = types.model('result', {
   id: types.maybe(types.number),
   givenAnswer: types.maybeNull(types.string),
   marks: types.optional(types.number, 0),
   questionExamId: types.maybe(types.number),
+  questionExam: types.maybe(QuestionExam),
+  examId: types.maybe(types.number),
+  exam: types.maybe(Exam),
   created_at: types.maybe(types.string),
   updated_at: types.maybe(types.string)
 })
@@ -21,14 +26,28 @@ export const Result = types.model('result', {
   },
   setQuestionExamId(questionExamId: number) {
     self.questionExamId = questionExamId;
+    console.log('setQuestionExamId', questionExamId);
   },
+  setQuestionExam(questionExam: any) {
+    let tempQuestionExam = {...questionExam};
+    self.questionExam = tempQuestionExam;
+  },
+  setExamId(examId: number) {
+    self.examId = examId;
+    console.log('setExamId', examId);
+  },
+  setExam(exam: any) {
+    let tempExam = {...exam};
+    self.exam = tempExam;
+  }
 })).actions(self => ({
-  setIdGivenAnswerMarksQuestionExamId(
-    id: number, givenAnswer: string, marks: number, questionExamId: number) {
+  setIdGivenAnswerMarksQuestionExamIdExamId(
+    id: number, givenAnswer: string, marks: number, questionExamId: number, examId: number) {
     self.setId(id);
     self.setGivenAnswer(givenAnswer);
     self.setMarks(marks);
     self.setQuestionExamId(questionExamId);
+    self.setExamId(examId);
   }
 })).actions(self => ({
   save() {
@@ -38,7 +57,7 @@ export const Result = types.model('result', {
       })
       .then(res => {
         console.log('data saved(Result)');
-        self.setIdGivenAnswerMarksQuestionExamId(0, '', 0, 0);
+        self.setIdGivenAnswerMarksQuestionExamIdExamId(0, '', 0, 0, 0);
       })
       .catch(err => {
         console.log(err);
@@ -63,7 +82,7 @@ export const Result = types.model('result', {
       })
       .then(res => {
         console.log('data updated(Exam)=>');
-        self.setIdGivenAnswerMarksQuestionExamId(0, '', 0, 0);
+        self.setIdGivenAnswerMarksQuestionExamIdExamId(0, '', 0, 0, 0);
       })
       .catch(err => {
         console.log(err);

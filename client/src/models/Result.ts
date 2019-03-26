@@ -7,9 +7,9 @@ export const Result = types.model('result', {
   id: types.maybe(types.number),
   givenAnswer: types.maybeNull(types.string),
   marks: types.optional(types.number, 0),
-  questionExamId: types.maybe(types.number),
+  questionExamId: types.optional(types.number, 0),
   questionExam: types.maybe(QuestionExam),
-  examId: types.maybe(types.number),
+  examId: types.optional(types.number, 0),
   exam: types.maybe(Exam),
   created_at: types.maybe(types.string),
   updated_at: types.maybe(types.string)

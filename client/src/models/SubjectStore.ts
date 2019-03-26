@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const SubjectStore = types
   .model('subjectStore', {
-    Subject: types.optional(Subject, {}),
+    subject: types.optional(Subject, {}),
     tempSubjects: types.optional(types.array(Subject), [{}]),
     subjects: types.optional(types.array(Subject), [])
   })

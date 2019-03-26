@@ -16,57 +16,61 @@ export const LiveExamResultSheet = inject('store')(
         <div className="resultSheetHeader flex tc mt3 bg-light-green br3">
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
-                <p className="tr pl2 f6 mb0">Date: {examStore.exam.date}</p>
+                <p className="tl pl2 f6 mb0">Date: {examStore.exam.date}</p>
                 <p className="tl pl2 f6 mb0">
                   Negative Mark: {examStore.exam.negativeMark}
                 </p>
-                <p className="tr pl2 f6 mb0">
+                <p className="tl pl2 f6 mb0">
                   Duration: {examStore.exam.duration}
                 </p>
                 <p className="tl pl2 f6 mb0">
-                  Total: {questionExamStore.questionExams.filter((questionExam: any) =>
-                      questionExam.examId === examStore.exam.id).length}
+                  Total: {resultStore.results.filter((result: any) =>
+                      result.examId === examStore.exam.id).length}
                 </p>
               </div>
             </div>
             <div className="w-40 flex flex-column justify-center">
               <p className="tc f3 mb1 b">{examStore.exam.title}</p>
-              {/* <p className="tc f6 mb1">Subject: {examStore.exam.subject!.title}</p> */}
+              <p className="tc f6 mb1">Subject: {examStore.exam.subject!.title}</p>
             </div>
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
-                <p className="tl pr2 f6 mb0">
+                <p className="tr pr2 f6 mb0">
                   Obtained Marks: {questionExamStore.questionExams.filter((questionExam: any) =>
                       questionExam.examId === examStore.exam.id).length}
                 </p>
-                <p className="tl pr2 f6 mb0">
-                  Not Answered: {questionExamStore.questionExams.filter((questionExam: any) =>
-                      questionExam.examId === examStore.exam.id).length}
+                <p className="tr pr2 f6 mb0">
+                  Not Answered: {resultStore.results.filter((result: any) =>
+                      result.marks === 0 && result.examId === examStore.exam.id).length}
                 </p>
-                <p className="tl pr2 f6 mb0">
-                  Wrong Answered: {questionExamStore.questionExams.filter((questionExam: any) =>
-                      questionExam.examId === examStore.exam.id).length}
+                <p className="tr pr2 f6 mb0">
+                  Wrong Answered: {resultStore.results.filter((result: any) =>
+                      result.marks < 0 && result.examId === examStore.exam.id).length}
                 </p>
-                <p className="tl pr2 f6 mb0">
-                  Correct Answered: {questionExamStore.questionExams.filter((questionExam: any) =>
-                      questionExam.examId === examStore.exam.id).length}
+                <p className="tr pr2 f6 mb0">
+                  Correct Answered: {resultStore.results.filter((result: any) =>
+                      result.marks > 0 && result.examId === examStore.exam.id).length}
                 </p>
               </div>
             </div>
           </div>
           <div className="answerSheetContent w-100 flex mv3">
             <div className="w-100 ph2 flex flex-wrap">
-              {questionExamStore.questionExams
+              {resultStore.results
                 .filter(
-                  (questionExam: any) =>
-                    questionExam.examId === examStore.exam.id
+                  (result: any) =>
+                    result.examId === examStore.exam.id
                 )
-                .map((questionExam: any, index: number) => (
+                .map((result: any, index: number) => (
                   <Card key={index} className="pa3 ma2 w-48">
-                    {resultStore.tempResults[index].setQuestionExamId(questionExam.id!)}
-                    <p className="f6 b"><span>{index + 1}. </span> {questionExam.question.title}</p>
+                    <p className="f6 b"><span>{index + 1}. </span> {result.questionExam.question!.title}</p>
                     <div>
-                      Result
+                      <div>
+                        <p><span className="resultRadioDesign" /> {result.questionExam.option1}</p>
+                        <p><span className="resultRadioDesign" /> {result.questionExam.option2}</p>
+                        <p><span className="resultRadioDesign" /> {result.questionExam.option3}</p>
+                        <p><span className="resultRadioDesign" /> {result.questionExam.option4}</p>
+                      </div>
                     </div>
                   </Card>
                 ))}

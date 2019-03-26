@@ -15,7 +15,7 @@ class ResultController extends Controller
      */
     public function index()
     {
-           return Result::with(['questionExam','questionExam.exam','questionExam.question','questionExam.exam.subject:id,title','exam'])->get();
+           return Result::with(['questionExam','questionExam.exam','questionExam.question','questionExam.exam.subject','exam'])->get();
     }
    
     public function store(Request $request)

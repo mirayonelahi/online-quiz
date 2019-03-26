@@ -36,7 +36,7 @@ export const QuestionExamList = inject('store')(
                 )
                 .map((questionExam: any, questionExamIndex: number) => (
                   <tr key={questionExamIndex}>
-                    <td className="f7">{questionExamIndex}</td>
+                    <td className="f7">{questionExamIndex + 1}</td>
                     <td className="f7">{questionExam.question.title}</td>
                     <td className="f7">{questionExam.question.answer}</td>
                     <td className="f7">{questionExam.option1}</td>

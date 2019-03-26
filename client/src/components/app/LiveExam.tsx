@@ -38,7 +38,7 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
                 <p className="tl">Subject: {exam.subject.title}</p>
                 <p className="tl">Negative Mark: {exam.negativeMark}</p>
                 <p className="tl">Date: {exam.date}</p>
-                <p className="mb0 tl">Duration {exam.duration}</p>
+                <p className="mb0 tl">Duration: {exam.duration}</p>
               </Link>
             </Card>
           ))}

@@ -3,7 +3,7 @@ import { types, getSnapshot } from 'mobx-state-tree';
 import axios from 'axios';
 
 export const QuestionStore = types.model('questiostore', {
- Question: types.optional(Question, {}),
+ question: types.optional(Question, {}),
  tempQuestions: types.optional(types.array(Question), [{}]),
  questions: types.optional(types.array(Question), [])
 })

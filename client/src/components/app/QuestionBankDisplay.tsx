@@ -70,7 +70,7 @@ export const QuestionBankDisplay = observer(
                             className="bp3-button bp3-icon-edit bp3-minimal bp3-popover-dismiss pointer
                           bg-animate noOutline"
                             onClick={(e: any) => {
-                              props.questionStore.Question.setIdTitleAnswerExplanationSubjectId(
+                              props.questionStore.question.setIdTitleAnswerExplanationSubjectId(
                                 question.id,
                                 question.title,
                                 question.answer,
@@ -92,9 +92,9 @@ export const QuestionBankDisplay = observer(
                                   placeholder="Whice one is prime number?"
                                   leftIcon="document"
                                   className="width35vw"
-                                  value={props.questionStore.Question.title}
+                                  value={props.questionStore.question.title}
                                   onChange={(e: any) => {
-                                    props.questionStore.Question.setTitle(e.target.value);
+                                    props.questionStore.question.setTitle(e.target.value);
                                   }}
                                 />
                               </FormGroup>
@@ -106,9 +106,9 @@ export const QuestionBankDisplay = observer(
                                   placeholder="5"
                                   leftIcon="document-open"
                                   className="width35vw"
-                                  value={props.questionStore.Question.answer}
+                                  value={props.questionStore.question.answer}
                                   onChange={(e: any) => {
-                                    props.questionStore.Question.setAnswer(e.target.value);
+                                    props.questionStore.question.setAnswer(e.target.value);
                                   }}
                                 />
                               </FormGroup>
@@ -124,10 +124,10 @@ export const QuestionBankDisplay = observer(
                                   leftIcon="geosearch"
                                   className="width35vw"
                                   value={
-                                    props.questionStore.Question.explanation
+                                    props.questionStore.question.explanation
                                   }
                                   onChange={(e: any) => {
-                                    props.questionStore.Question.setExplanation(e.target.value);
+                                    props.questionStore.question.setExplanation(e.target.value);
                                   }}
                                 />
                               </FormGroup>
@@ -137,10 +137,10 @@ export const QuestionBankDisplay = observer(
                                 <FormGroup label="Subject" labelFor="subject">
                                   <div className="bp3-select bp3-fill">
                                     <select
-                                      value={props.questionStore.Question.subjectId}
+                                      value={props.questionStore.question.subjectId}
                                       onChange={(e: any) => {
                                         e.preventDefault();
-                                        props.questionStore.Question.setSubjectId(parseInt(e.target.value, 10));
+                                        props.questionStore.question.setSubjectId(parseInt(e.target.value, 10));
                                       }}
                                     >
                                       {props.subjectStore.subjects.map((subject: any, subjectIndex: number) => (
@@ -159,7 +159,7 @@ export const QuestionBankDisplay = observer(
                               bp3-intent-success bp3-popover-dismiss pointer
                               br2Important mv1 bg-animate w-100 noOutline"
                                 onClick={(e: any) => {
-                                  props.questionStore.Question.onUpdate(props.questionStore.Question.id!);
+                                  props.questionStore.question.onUpdate(props.questionStore.question.id!);
                                   props.questionStore.getAll();
                                 }}
                               >
@@ -174,7 +174,7 @@ export const QuestionBankDisplay = observer(
                           className="bp3-button bp3-icon-delete bp3-minimal bg-animate noOutline"
                           onClick={(e: any) => {
                             e.preventDefault();
-                            props.questionStore.Question.onDelete(question.id);
+                            props.questionStore.question.onDelete(question.id);
                             props.questionStore.getAll();
                           }}
                         />

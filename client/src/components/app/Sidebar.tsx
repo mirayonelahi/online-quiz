@@ -27,11 +27,25 @@ export const Sidebar = observer(
               </i>
             </Link>
           </li>
+          <li className="bp3-menu-header">
+            <h6 className="bp3-heading">
+              {props.controller.sidebarClose ? '' : 'Examinations'}
+            </h6>
+          </li>
           <li className="">
             <Link to="/liveExam" className="sidebarLinks">
               <i className="bp3-menu-item bp3-icon-clipboard">
                 <span className="bp3-heading ma0">
                   {props.controller.sidebarClose ? '' : 'Live Exam'}
+                </span>
+              </i>
+            </Link>
+          </li>
+          <li className="">
+            <Link to="/liveExamResult" className="sidebarLinks">
+              <i className="bp3-menu-item bp3-icon-git-repo">
+                <span className="bp3-heading ma0">
+                  {props.controller.sidebarClose ? '' : 'Live Exam Result'}
                 </span>
               </i>
             </Link>

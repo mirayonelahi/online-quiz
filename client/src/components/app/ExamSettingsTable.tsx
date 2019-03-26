@@ -43,7 +43,7 @@ export const ExamSettingsTable = inject('store')(observer((props: InjecttedPageP
           {
             examStore.exams.map((exam: any, index: number) => (
             <tr key={index}>
-              <td className="f7">{index}</td>
+              <td className="f7">{index + 1}</td>
               <td className="f7">{exam.title}</td>
               <td className="f7">{exam.subject.title}</td>
               <td className="f7">{exam.negativeMark}</td>

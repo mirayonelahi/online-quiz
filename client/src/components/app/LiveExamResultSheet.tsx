@@ -65,19 +65,15 @@ export const LiveExamResultSheet = inject('store')(
                 )
                 .map((result: any, index: number) => (
                   <Card key={index} className="pa3 ma2 w-48">
-                  {
-                    // questionStore.questions.filter()
-                    console.log('aaaaaaa->', result.questionExam)
-                  }
-                    {/* <p className="f6 b"><span>{index + 1}. </span> {result.questionExam!.question!.title}</p> */}
-                    {/* <div>
+                    <p className="f6 b"><span>{index + 1}. </span> {result.question_exam.question.title}</p>
+                    <div>
                       <div>
-                        <p><span className="resultRadioDesign" /> {result.questionExam!.option1}</p>
-                        <p><span className="resultRadioDesign" /> {result.questionExam!.option2}</p>
-                        <p><span className="resultRadioDesign" /> {result.questionExam!.option3}</p>
-                        <p><span className="resultRadioDesign" /> {result.questionExam!.option4}</p>
+                        <p><span className="resultRadioDesign" /> {result.question_exam.option1}</p>
+                        <p><span className="resultRadioDesign" /> {result.question_exam.option2}</p>
+                        <p><span className="resultRadioDesign" /> {result.question_exam.option3}</p>
+                        <p><span className="resultRadioDesign" /> {result.question_exam.option4}</p>
                       </div>
-                    </div> */}
+                    </div>
                   </Card>
                 ))}
             </div>

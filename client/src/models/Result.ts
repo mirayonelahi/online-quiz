@@ -8,7 +8,7 @@ export const Result = types.model('result', {
   givenAnswer: types.maybeNull(types.string),
   marks: types.optional(types.number, 0),
   questionExamId: types.optional(types.number, 0),
-  questionExam: types.maybe(QuestionExam),
+  question_exam: types.maybe(QuestionExam), // foreign key hishebe question_exam ashe. as table er nam question_exams
   examId: types.optional(types.number, 0),
   exam: types.maybe(Exam),
   created_at: types.maybe(types.string),
@@ -30,7 +30,7 @@ export const Result = types.model('result', {
   },
   setQuestionExam(questionExam: any) {
     let tempQuestionExam = {...questionExam};
-    self.questionExam = tempQuestionExam;
+    self.question_exam = tempQuestionExam;
   },
   setExamId(examId: number) {
     self.examId = examId;

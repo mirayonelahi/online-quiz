@@ -16,7 +16,10 @@ import { LiveExamResult } from './LiveExamResult';
 import { Example } from './Example';
 
 export const SidebarContent = observer(
-  (props: { controller: typeof Controller.Type; store: typeof Store.Type }) => {
+  (props: {
+    controller: typeof Controller.Type;
+    store: typeof Store.Type;
+  }) => {
     return (
       <section
         className={`ph5 pv3 sidebarContentSection transitionAll ${
@@ -91,7 +94,9 @@ export const SidebarContent = observer(
                 exact={true}
                 strict={true}
                 render={() => (
-                  <SubjectSettings subjectStore={props.store.subjectStore} />
+                  <SubjectSettings
+                    subjectStore={props.store.subjectStore}
+                  />
                 )}
               />
             </Switch>

@@ -17,7 +17,10 @@ class SubjectController extends Controller
     {
         return Subject::all();
     }
-
+    public function search($field, $query)
+    {
+        return  Subject::where($field, 'LIKE', "%$query%")->get();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -27,8 +30,8 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         return Subject::create([
-            'title'=>$request['title'],
-            'code'=>$request['code']
+            'title' => $request['title'],
+            'code' => $request['code']
         ]);
     }
 
@@ -52,7 +55,7 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $subject=Subject::findOrfail($id);
+        $subject = Subject::findOrfail($id);
         $subject->update($request->all());
         return $subject;
     }
@@ -65,7 +68,7 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        $subject=Subject::findOrfail($id);
+        $subject = Subject::findOrfail($id);
         $subject->delete();
         return 204;
     }

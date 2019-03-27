@@ -14,7 +14,10 @@ import { QuestionStore } from 'src/models/QuestionStore';
 import { SubjectStore } from 'src/models/SubjectStore';
 
 export const QuestionBankDisplay = observer(
-  (props: { questionStore: typeof QuestionStore.Type; subjectStore: typeof SubjectStore.Type }) => {
+  (props: {
+    questionStore: typeof QuestionStore.Type;
+    subjectStore: typeof SubjectStore.Type;
+  }) => {
     return (
       <Card
         elevation={Elevation.ONE}
@@ -22,15 +25,42 @@ export const QuestionBankDisplay = observer(
       >
         <div className="bp3-control-group">
           <div className="bp3-select">
-            <select>
-              <option value="2">Question</option>
-              <option value="1">Subject</option>
-              <option value="1">Id</option>
+            <select
+              name="searchPriority"
+              id="searchPriority"
+              placeholder="Select priority !!"
+              onChange={(e: any) => {
+                e.preventDefault();
+                props.questionStore.searchStore.setsearchField(e.target.value);
+                // console.log('searchField', props.todoStore.todoSearchStore.searchField);
+                props.questionStore.onSearch(
+                  props.questionStore.searchStore.searchField,
+                  props.questionStore.searchStore.searchQuery
+                );
+              }}
+            >
+              <option value="title">Question</option>
+              <option value="subject">Subject</option>
             </select>
           </div>
           <div className="bp3-input-group bp3-fill">
             <span className="bp3-icon bp3-icon-search" />
-            <input type="text" className="bp3-input" placeholder="Search" />
+            <input
+              className="bp3-input"
+              id="searchQuery"
+              name="searchQuery"
+              type="text"
+              placeholder="Search here"
+              onChange={(e: any) => {
+                e.preventDefault();
+                props.questionStore.searchStore.setsearchQuery(e.target.value);
+                // console.log('searchQuery', props.todoStore.todoSearchStore.searchQuery);
+                props.questionStore.onSearch(
+                  props.questionStore.searchStore.searchField,
+                  props.questionStore.searchStore.searchQuery
+                );
+              }}
+            />
           </div>
         </div>
         <p className="f6 tc mt2 b bg-light-green br2 pa1">List of Questions</p>
@@ -94,7 +124,9 @@ export const QuestionBankDisplay = observer(
                                   className="width35vw"
                                   value={props.questionStore.question.title}
                                   onChange={(e: any) => {
-                                    props.questionStore.question.setTitle(e.target.value);
+                                    props.questionStore.question.setTitle(
+                                      e.target.value
+                                    );
                                   }}
                                 />
                               </FormGroup>
@@ -108,7 +140,9 @@ export const QuestionBankDisplay = observer(
                                   className="width35vw"
                                   value={props.questionStore.question.answer}
                                   onChange={(e: any) => {
-                                    props.questionStore.question.setAnswer(e.target.value);
+                                    props.questionStore.question.setAnswer(
+                                      e.target.value
+                                    );
                                   }}
                                 />
                               </FormGroup>
@@ -127,7 +161,9 @@ export const QuestionBankDisplay = observer(
                                     props.questionStore.question.explanation
                                   }
                                   onChange={(e: any) => {
-                                    props.questionStore.question.setExplanation(e.target.value);
+                                    props.questionStore.question.setExplanation(
+                                      e.target.value
+                                    );
                                   }}
                                 />
                               </FormGroup>
@@ -137,14 +173,25 @@ export const QuestionBankDisplay = observer(
                                 <FormGroup label="Subject" labelFor="subject">
                                   <div className="bp3-select bp3-fill">
                                     <select
-                                      value={props.questionStore.question.subjectId}
+                                      value={
+                                        props.questionStore.question.subjectId
+                                      }
                                       onChange={(e: any) => {
                                         e.preventDefault();
-                                        props.questionStore.question.setSubjectId(parseInt(e.target.value, 10));
+                                        props.questionStore.question.setSubjectId(
+                                          parseInt(e.target.value, 10)
+                                        );
                                       }}
                                     >
-                                      {props.subjectStore.subjects.map((subject: any, subjectIndex: number) => (
-                                          <option key={subjectIndex} value={subject.id}>
+                                      {props.subjectStore.subjects.map(
+                                        (
+                                          subject: any,
+                                          subjectIndex: number
+                                        ) => (
+                                          <option
+                                            key={subjectIndex}
+                                            value={subject.id}
+                                          >
                                             {subject.title}
                                           </option>
                                         )
@@ -159,7 +206,9 @@ export const QuestionBankDisplay = observer(
                               bp3-intent-success bp3-popover-dismiss pointer
                               br2Important mv1 bg-animate w-100 noOutline"
                                 onClick={(e: any) => {
-                                  props.questionStore.question.onUpdate(props.questionStore.question.id!);
+                                  props.questionStore.question.onUpdate(
+                                    props.questionStore.question.id!
+                                  );
                                   props.questionStore.getAll();
                                 }}
                               >

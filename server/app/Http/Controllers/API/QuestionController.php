@@ -19,6 +19,17 @@ class QuestionController extends Controller
         // $books = Question::with('subject')->get();
         // dd($books->find(1)->subject->title);
     }
+    public function search($field, $query)
+    {
+        if ($field == 'subject') {
+            $dept = Question::with('subject')->whereHas('subject', function ($q) use ($query) {
+                $q->where('title', 'LIKE', "%$query%");
+            })->get();
+            return $dept;
+        } else {
+            return  Question::with('subject')->where($field, 'LIKE', "%$query%")->get();
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,10 +40,10 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         return Question::create([
-            'title'=>$request['title'],
-            'answer'=>$request['answer'],
-            'explanation'=>$request['explanation'],
-            'subjectId'=>$request['subjectId']
+            'title' => $request['title'],
+            'answer' => $request['answer'],
+            'explanation' => $request['explanation'],
+            'subjectId' => $request['subjectId']
         ]);
     }
 
@@ -56,7 +67,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question=Question::findOrfail($id);
+        $question = Question::findOrfail($id);
         $question->update($request->all());
         return $question;
     }
@@ -69,7 +80,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question=Question::findOrfail($id);
+        $question = Question::findOrfail($id);
         $question->delete();
         return 204;
     }

@@ -1,3 +1,4 @@
+import { SearchStore } from './SearchStore';
 import { types, getSnapshot } from 'mobx-state-tree';
 import { Subject } from './Subject';
 import axios from 'axios';
@@ -6,7 +7,8 @@ export const SubjectStore = types
   .model('subjectStore', {
     subject: types.optional(Subject, {}),
     tempSubjects: types.optional(types.array(Subject), [{}]),
-    subjects: types.optional(types.array(Subject), [])
+    subjects: types.optional(types.array(Subject), []),
+    searchStore: types.optional(SearchStore, {})
   })
   .actions(self => ({
     resetTempSubjects() {
@@ -59,5 +61,21 @@ export const SubjectStore = types
   .actions(self => ({
     afterCreate() {
       self.getAll();
+    },
+    onSearch(field: string, query: string) {
+      if (query === '') { console.log('empty query'); self.getAll(); } else {
+        axios
+          .get(`/api/search/subjects/${field}/${query}`, {
+            headers: { 'Content-Type': 'application/json' }
+          })
+          .then(res => {
+            console.log('from search', res.data);
+            self.setSubjects(res.data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        // self.getAll();
+      }
     },
   }));

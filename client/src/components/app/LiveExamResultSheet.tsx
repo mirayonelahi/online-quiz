@@ -67,13 +67,70 @@ export const LiveExamResultSheet = inject('store')(
                   <Card key={index} className="pa3 ma2 w-48">
                     <p className="f6 b"><span>{index + 1}. </span> {result.question_exam.question.title}</p>
                     <div>
-                      <div>
-                        <p><span className="resultRadioDesign" /> {result.question_exam.option1}</p>
-                        <p><span className="resultRadioDesign" /> {result.question_exam.option2}</p>
-                        <p><span className="resultRadioDesign" /> {result.question_exam.option3}</p>
-                        <p><span className="resultRadioDesign" /> {result.question_exam.option4}</p>
+                      <div className="flex">
+                        <div
+                          className={`resultRadioDesign 
+                          ${result.question_exam.option1 === result.givenAnswer ?
+                            'bg-light-red ' : ''}
+                          ${(result.question_exam.option1 === result.question_exam.question.answer)
+                            && result.givenAnswer !== null ?
+                              'bg-light-green ' : ''}
+                          ${(result.question_exam.option1 === result.question_exam.question.answer)
+                            && result.givenAnswer === null ?
+                              'bg-yellow ' : ''}
+                          `} 
+                        />
+                        <p> {result.question_exam.option1}</p>
+                      </div>
+                      <div className="flex">
+                        <div
+                          className={`resultRadioDesign 
+                          ${result.question_exam.option2 === result.givenAnswer ?
+                            'bg-light-red ' : ''}
+                          ${(result.question_exam.option2 === result.question_exam.question.answer)
+                            && result.givenAnswer !== null ?
+                              'bg-light-green ' : ''}
+                          ${(result.question_exam.option2 === result.question_exam.question.answer)
+                              && result.givenAnswer === null ?
+                              'bg-yellow ' : ''}
+                          `}
+                        />
+                        <p> {result.question_exam.option2}</p>
+                      </div>
+                      <div className="flex">
+                        <div
+                          className={`resultRadioDesign 
+                          ${result.question_exam.option3 === result.givenAnswer ?
+                            'bg-light-red ' : ''}
+                          ${(result.question_exam.option3 === result.question_exam.question.answer)
+                            && result.givenAnswer !== null ?
+                              'bg-light-green ' : ''}
+                          ${(result.question_exam.option3 === result.question_exam.question.answer)
+                              && result.givenAnswer === null ?
+                              'bg-yellow ' : ''}
+                          `}
+                        />
+                        <p> {result.question_exam.option3}</p>
+                      </div>
+                      <div className="flex">
+                        <div
+                          className={`resultRadioDesign 
+                          ${result.question_exam.option4 === result.givenAnswer ?
+                            'bg-light-red ' : ''}
+                          ${(result.question_exam.option4 === result.question_exam.question.answer)
+                            && result.givenAnswer !== null ?
+                              'bg-light-green ' : ''}
+                          ${(result.question_exam.option4 === result.question_exam.question.answer)
+                              && result.givenAnswer === null ?
+                              'bg-yellow ' : ''}
+                          `}
+                        />
+                        <p> {result.question_exam.option4}</p>
                       </div>
                     </div>
+                    <p className="f6">
+                      <span className="b">Explanation: </span> {result.question_exam.question.explanation}
+                    </p>
                   </Card>
                 ))}
             </div>

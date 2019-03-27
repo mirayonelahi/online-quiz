@@ -195,7 +195,13 @@
   flex-wrap: wrap;
   flex-direction: row;
 }
-
+.resultRadioDesign{
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  border: 1px solid #182026;
+  margin: 3px 5px 0px 5px;
+}
 
 
 

@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Card, Elevation, RadioGroup, Radio } from '@blueprintjs/core';
 import { Store } from 'src/models/Store';
 import { Link } from 'react-router-dom';
+import Countdown from 'react-countdown-now';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
@@ -10,7 +11,7 @@ interface InjecttedPageProps {
 
 export const LiveExamAnswerSheet = inject('store')(
   observer((props: InjecttedPageProps) => {
-    const { examStore, questionExamStore, resultStore } = props.store!;
+    const { examStore, questionExamStore, resultStore, controller } = props.store!;
     return (
       <Card interactive={true} elevation={Elevation.TWO} className="w-100">
         <div className="answerSheet">
@@ -28,14 +29,14 @@ export const LiveExamAnswerSheet = inject('store')(
             </div>
             <div className="w-40 mv2 flex flex-column justify-center">
               <p className="tc f3 mb1 b">{examStore.exam.title}</p>
-              <p className="tc f6 mb1">Subject: {examStore.exam.subject!.title}</p>
+              {/* <p className="tc f6 mb1">Subject: {examStore.exam.subject!.title}</p> */}
               <p className="tc f6 mb1">Time Left: </p>
             </div>
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
                 <p className="tr pr2 f6 mb0">Date: {examStore.exam.date}</p>
                 <p className="tr pr2 f6 mb0">
-                  Duration: {examStore.exam.duration}
+                  Duration: {examStore.exam.duration} : <Countdown date={controller.examStartTime + 500000} />
                 </p>
               </div>
             </div>

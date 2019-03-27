@@ -25,6 +25,8 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
                 to="/liveExamAnswerSheet"
                 className="sidebarLinks"
                 onClick={(e: any) => {
+                  var examStartTime: any = new Date();
+                  localStorage.examStartTime = examStartTime;
                   // resultStore.resetTempResults();
                   examStore.exam.setIdTitleDurationSubjectIdDateNegativeMarkSubject(
                     exam.id, exam.title, exam.duration, exam.subjectId, exam.date, exam.negativeMark, exam.subject

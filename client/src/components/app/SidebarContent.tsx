@@ -13,6 +13,7 @@ import { LiveExam } from './LiveExam';
 import { LiveExamAnswerSheet } from './LiveExamAnswerSheet';
 import { LiveExamResultSheet } from './LiveExamResultSheet';
 import { LiveExamResult } from './LiveExamResult';
+import { Example } from './Example';
 
 export const SidebarContent = observer(
   (props: { controller: typeof Controller.Type; store: typeof Store.Type }) => {
@@ -37,6 +38,12 @@ export const SidebarContent = observer(
                 exact={true}
                 strict={true}
                 render={() => <LiveExam />}
+              />
+              <Route
+                path="/example"
+                exact={true}
+                strict={true}
+                render={() => <Example controller={props.store!.controller} />}
               />
               <Route
                 path="/liveExamResult"
@@ -66,9 +73,7 @@ export const SidebarContent = observer(
                 path="/examSettings"
                 exact={true}
                 strict={true}
-                render={() => (
-                  <ExamSettings />
-                )}
+                render={() => <ExamSettings />}
               />
               <Route
                 path="/questionBank"

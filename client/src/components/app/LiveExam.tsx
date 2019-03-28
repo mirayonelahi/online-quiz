@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Card, Elevation } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import { Store } from 'src/models/Store';
+import { Exam } from 'src/models/Exam';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
@@ -25,15 +26,16 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
                 to="/liveExamAnswerSheet"
                 className="sidebarLinks"
                 onClick={(e: any) => {
-                  var examStartTime: any = new Date();
-                  localStorage.examStartTime = examStartTime;
-                  // resultStore.resetTempResults();
                   examStore.exam.setIdTitleDurationSubjectIdDateNegativeMarkSubject(
                     exam.id, exam.title, exam.duration, exam.subjectId, exam.date, exam.negativeMark, exam.subject
                   );
                   resultStore.pushInTempResults(questionExamStore.questionExams.filter(
                     (questionExam: any) => questionExam.examId === examStore.exam.id
                   ).length);
+                  const examStartTime: any = new Date();
+                  localStorage.examStartTime = examStartTime;
+                  const localExam: typeof Exam.Type = examStore.exam;
+                  localStorage.localExam = JSON.stringify(localExam);
                 }}
               >
                 <p className="b tl">Exam: {exam.title}</p>

@@ -3,20 +3,20 @@ import React from 'react';
 import Countdown from 'react-countdown-now';
 import { observer } from 'mobx-react';
 import { Controller } from 'src/models/Controller';
-var now = new Date().getTime();
+var now: Date = new Date();
 // // var ready = moment(now)
 // //   .add(30, 'm')
 // //   .toDate();
 
 // // var timeDiff = Math.abs(ready.getTime() - now);
 // //    // Store value
-localStorage.setItem('quizstarttime', JSON.stringify(now));
-now = JSON.parse(localStorage.quizstarttime);
+// localStorage.setItem('quizstarttime', JSON.stringify(now));
+// now = JSON.parse(localStorage.quizstarttime);
 // Retrieve value from local storage and assign to variable
-var cat = localStorage.getItem('quizstarttime');
+// var cat = localStorage.getItem('quizstarttime');
 // let saved = JSON.parse(localStorage.ayon);
 console.log('now', now);
-console.log('get', cat);
+// console.log('get', cat);
 // console.log('saved', saved);
 // var now1 = moment(now).format('h:mm:ss');
 // setInterval(() => {

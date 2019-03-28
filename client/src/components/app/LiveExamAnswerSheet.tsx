@@ -11,7 +11,18 @@ interface InjecttedPageProps {
 
 export const LiveExamAnswerSheet = inject('store')(
   observer((props: InjecttedPageProps) => {
-    const { examStore, questionExamStore, resultStore, controller } = props.store!;
+    const {
+      examStore,
+      questionExamStore,
+      resultStore,
+      // controller
+    } = props.store!;
+    let localExam = JSON.parse(localStorage.localExam);
+    console.log('localExam->', localExam);
+    let total = questionExamStore.questionExams.filter((questionExam: any) =>
+        questionExam.examId === examStore.exam.id).length;
+    localStorage.total = JSON.stringify(total);
+    
     return (
       <Card interactive={true} elevation={Elevation.TWO} className="w-100">
         <div className="answerSheet">
@@ -19,24 +30,30 @@ export const LiveExamAnswerSheet = inject('store')(
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
                 <p className="tl pl2 f6 mb0">
-                  Negative Mark: {examStore.exam.negativeMark}
+                  Negative Mark: {localExam.negativeMark}
                 </p>
                 <p className="tl pl2 f6 mb0">
-                  Total: {questionExamStore.questionExams.filter((questionExam: any) =>
-                      questionExam.examId === examStore.exam.id).length}
+                  Total: {localStorage.total}
                 </p>
               </div>
             </div>
             <div className="w-40 mv2 flex flex-column justify-center">
-              <p className="tc f3 mb1 b">{examStore.exam.title}</p>
-              {/* <p className="tc f6 mb1">Subject: {examStore.exam.subject!.title}</p> */}
-              <p className="tc f6 mb1">Time Left: </p>
+              <p className="tc f3 mb1 b">{localExam.title}</p>
+              <p className="tc f6 mb1">Subject: {localExam.subject.title}</p>
+              <p className="tc f6 mb1">
+                Time Left:{' '}
+                <Countdown
+                  date={
+                    Date.parse(localStorage.examStartTime) +  (parseInt(localStorage.examDuration, 10) * 60 * 1000)
+                  }
+                />{' '}
+              </p>
             </div>
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
-                <p className="tr pr2 f6 mb0">Date: {examStore.exam.date}</p>
+                <p className="tr pr2 f6 mb0">Date: {localExam.date}</p>
                 <p className="tr pr2 f6 mb0">
-                  Duration: {examStore.exam.duration} : <Countdown date={controller.examStartTime + 500000} />
+                  Duration: {localExam.duration}
                 </p>
               </div>
             </div>
@@ -50,26 +67,53 @@ export const LiveExamAnswerSheet = inject('store')(
                 )
                 .map((questionExam: any, index: number) => (
                   <Card key={index} className="pa3 ma2 w-48">
-                    {resultStore.tempResults[index].setQuestionExamId(parseInt(questionExam.id!, 10))}
-                    {resultStore.tempResults[index].setExamId(parseInt(questionExam.examId!, 10))}
-                    <p className="f6 b"><span>{index + 1}. </span> {questionExam.question.title}</p>
+                    {resultStore.tempResults[index].setQuestionExamId(
+                      parseInt(questionExam.id!, 10)
+                    )}
+                    {resultStore.tempResults[index].setExamId(
+                      parseInt(questionExam.examId!, 10)
+                    )}
+                    <p className="f6 b">
+                      <span>{index + 1}. </span> {questionExam.question.title}
+                    </p>
                     <RadioGroup
                       onChange={(e: any) => {
-                        resultStore.tempResults[index].setGivenAnswer(e.currentTarget.value);
+                        resultStore.tempResults[index].setGivenAnswer(
+                          e.currentTarget.value
+                        );
                         if (resultStore.tempResults[index].givenAnswer === '') {
                           resultStore.tempResults[index].setMarks(0);
-                        } else if (resultStore.tempResults[index].givenAnswer === questionExam.question.answer) {
+                        } else if (
+                          resultStore.tempResults[index].givenAnswer ===
+                          questionExam.question.answer
+                        ) {
                           resultStore.tempResults[index].setMarks(1);
                         } else {
-                          resultStore.tempResults[index].setMarks(0 + examStore.exam.negativeMark);
+                          resultStore.tempResults[index].setMarks(
+                            0 + examStore.exam.negativeMark
+                          );
                         }
                       }}
-                      selectedValue={resultStore.tempResults[index].givenAnswer!}
+                      selectedValue={
+                        resultStore.tempResults[index].givenAnswer!
+                      }
                     >
-                      <Radio label={`${questionExam.option1}`} value={`${questionExam.option1}`} />
-                      <Radio label={`${questionExam.option2}`} value={`${questionExam.option2}`} />
-                      <Radio label={`${questionExam.option3}`} value={`${questionExam.option3}`} />
-                      <Radio label={`${questionExam.option4}`} value={`${questionExam.option4}`} />
+                      <Radio
+                        label={`${questionExam.option1}`}
+                        value={`${questionExam.option1}`}
+                      />
+                      <Radio
+                        label={`${questionExam.option2}`}
+                        value={`${questionExam.option2}`}
+                      />
+                      <Radio
+                        label={`${questionExam.option3}`}
+                        value={`${questionExam.option3}`}
+                      />
+                      <Radio
+                        label={`${questionExam.option4}`}
+                        value={`${questionExam.option4}`}
+                      />
                     </RadioGroup>
                   </Card>
                 ))}
@@ -84,7 +128,7 @@ export const LiveExamAnswerSheet = inject('store')(
             resultStore.save();
           }}
         >
-        Submit Paper
+          Submit Paper
         </Link>
       </Card>
     );

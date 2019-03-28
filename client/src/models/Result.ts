@@ -26,7 +26,6 @@ export const Result = types.model('result', {
   },
   setQuestionExamId(questionExamId: number) {
     self.questionExamId = questionExamId;
-    console.log('setQuestionExamId', questionExamId);
   },
   setQuestionExam(questionExam: any) {
     let tempQuestionExam = {...questionExam};
@@ -34,7 +33,6 @@ export const Result = types.model('result', {
   },
   setExamId(examId: number) {
     self.examId = examId;
-    console.log('setExamId', examId);
   },
   setExam(exam: any) {
     let tempExam = {...exam};

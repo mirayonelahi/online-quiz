@@ -11,7 +11,10 @@ export const ResultStore = types
   .actions(self => ({
     setResults(results: any) {
       self.results = results;
-    }
+    },
+    setTempResults(tempResults: any) {
+      self.tempResults = tempResults;
+    },
   }))
   .actions(self => ({
     resetTempResults() {

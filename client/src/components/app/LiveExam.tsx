@@ -36,6 +36,8 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
                   localStorage.examStartTime = examStartTime;
                   const localExam: typeof Exam.Type = examStore.exam;
                   localStorage.localExam = JSON.stringify(localExam);
+                  const localTempResults: any = resultStore.tempResults;
+                  localStorage.localTempResults = JSON.stringify(localTempResults);
                 }}
               >
                 <p className="b tl">Exam: {exam.title}</p>

@@ -18,10 +18,10 @@ export const LiveExamAnswerSheet = inject('store')(
       // controller
     } = props.store!;
     let localExam = JSON.parse(localStorage.localExam);
-    console.log('localExam->', localExam);
     let total = questionExamStore.questionExams.filter((questionExam: any) =>
         questionExam.examId === examStore.exam.id).length;
     localStorage.total = JSON.stringify(total);
+    let localTempResults = JSON.parse(localStorage.localTempResults);
     
     return (
       <Card interactive={true} elevation={Elevation.TWO} className="w-100">
@@ -44,7 +44,7 @@ export const LiveExamAnswerSheet = inject('store')(
                 Time Left:{' '}
                 <Countdown
                   date={
-                    Date.parse(localStorage.examStartTime) +  (parseInt(localStorage.examDuration, 10) * 60 * 1000)
+                    Date.parse(localStorage.examStartTime) +  (parseInt(localExam.duration, 10) * 60 * 1000)
                   }
                 />{' '}
               </p>
@@ -63,56 +63,71 @@ export const LiveExamAnswerSheet = inject('store')(
               {questionExamStore.questionExams
                 .filter(
                   (questionExam: any) =>
-                    questionExam.examId === examStore.exam.id
+                    questionExam.examId === localExam.id
                 )
                 .map((questionExam: any, index: number) => (
                   <Card key={index} className="pa3 ma2 w-48">
-                    {resultStore.tempResults[index].setQuestionExamId(
+                    {/* {resultStore.tempResults[index].setQuestionExamId(
                       parseInt(questionExam.id!, 10)
-                    )}
-                    {resultStore.tempResults[index].setExamId(
+                    )} */}
+                    {/* {resultStore.tempResults[index].setExamId(
                       parseInt(questionExam.examId!, 10)
-                    )}
+                    )} */}
+                    <p className="dn">
+                      {localTempResults[index].questionExamId = questionExam.id}
+                      {localTempResults[index].examId = questionExam.examId}
+                    </p>
                     <p className="f6 b">
                       <span>{index + 1}. </span> {questionExam.question.title}
                     </p>
                     <RadioGroup
                       onChange={(e: any) => {
-                        resultStore.tempResults[index].setGivenAnswer(
-                          e.currentTarget.value
-                        );
-                        if (resultStore.tempResults[index].givenAnswer === '') {
-                          resultStore.tempResults[index].setMarks(0);
+                        // resultStore.tempResults[index].setGivenAnswer(
+                        //   e.currentTarget.value
+                        // );
+                        localTempResults[index].givenAnswer = e.currentTarget.value;
+                        // if (resultStore.tempResults[index].givenAnswer === '') {
+                        //   resultStore.tempResults[index].setMarks(0);
+                        // } else if (
+                        //   resultStore.tempResults[index].givenAnswer ===
+                        //   questionExam.question.answer
+                        // ) {
+                        //   resultStore.tempResults[index].setMarks(1);
+                        // } else {
+                        //   resultStore.tempResults[index].setMarks(
+                        //     0 + examStore.exam.negativeMark
+                        //   );
+                        // }
+                        if (localTempResults[index].givenAnswer === '') {
+                          localTempResults[index].marks = 0;
                         } else if (
-                          resultStore.tempResults[index].givenAnswer ===
+                          localTempResults[index].givenAnswer ===
                           questionExam.question.answer
                         ) {
-                          resultStore.tempResults[index].setMarks(1);
+                          localTempResults[index].marks = 1;
                         } else {
-                          resultStore.tempResults[index].setMarks(
-                            0 + examStore.exam.negativeMark
-                          );
+                          localTempResults[index].marks = 0 + localExam.negativeMark;
                         }
+                        console.log(localTempResults);
+                        // console.log(questionExam.option1 === localTempResults[index].givenAnswer);
                       }}
-                      selectedValue={
-                        resultStore.tempResults[index].givenAnswer!
-                      }
+                      selectedValue={localTempResults[index].givenAnswer!}
                     >
                       <Radio
-                        label={`${questionExam.option1}`}
-                        value={`${questionExam.option1}`}
+                        label={questionExam.option1}
+                        value={questionExam.option1}
                       />
                       <Radio
-                        label={`${questionExam.option2}`}
-                        value={`${questionExam.option2}`}
+                        label={questionExam.option2}
+                        value={questionExam.option2}
                       />
                       <Radio
-                        label={`${questionExam.option3}`}
-                        value={`${questionExam.option3}`}
+                        label={questionExam.option3}
+                        value={questionExam.option3}
                       />
                       <Radio
-                        label={`${questionExam.option4}`}
-                        value={`${questionExam.option4}`}
+                        label={questionExam.option4}
+                        value={questionExam.option4}
                       />
                     </RadioGroup>
                   </Card>
@@ -125,6 +140,7 @@ export const LiveExamAnswerSheet = inject('store')(
           className="sidebarLinks answerSheetButton bp3-button
            bp3-icon-manually-entered-data bp3-fill bp3-intent-success"
           onClick={(e: any) => {
+            resultStore.setTempResults(localTempResults);
             resultStore.save();
           }}
         >

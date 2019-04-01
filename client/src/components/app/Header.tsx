@@ -30,9 +30,23 @@ export const Header = observer(
             </Link>
           </button>
           <span className="bp3-navbar-divider" />
-          <button className="bp3-button bp3-minimal bp3-icon-user" />
+          <button
+           className="bp3-button bp3-minimal bp3-icon-user"
+           onClick={(e: any) => {
+            e.preventDefault();
+            return window.location.href = '/profile';
+          }}
+          />
           <button className="bp3-button bp3-minimal bp3-icon-notifications" />
           <button className="bp3-button bp3-minimal bp3-icon-cog" />
+          <button
+           className="bp3-button bp3-minimal bp3-icon-log-out"
+           onClick={(e: any) => {
+            e.preventDefault();
+            localStorage.removeItem('usertoken');
+            return window.location.href = '/login';
+          }}
+          />
         </div>
       </nav>
     );

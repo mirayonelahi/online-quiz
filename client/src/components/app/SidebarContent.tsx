@@ -14,6 +14,9 @@ import { LiveExamAnswerSheet } from './LiveExamAnswerSheet';
 import { LiveExamResultSheet } from './LiveExamResultSheet';
 import { LiveExamResult } from './LiveExamResult';
 import { Example } from './Example';
+import { Login } from './Login';
+import { Register } from './Register';
+import { Profile } from './Profile';
 
 export const SidebarContent = observer(
   (props: {
@@ -36,6 +39,39 @@ export const SidebarContent = observer(
                 strict={true}
                 render={() => <Home />}
               />
+              <Route
+                path="/login"
+                exact={true}
+                strict={true}
+                render={() => <Login />}
+              />
+              <Route
+                path="/register"
+                exact={true}
+                strict={true}
+                render={() => <Register />}
+              />
+              <Route
+                path="/profile"
+                exact={true}
+                strict={true}
+                render={() => <Profile />}
+              />
+              {localStorage.usertoken ? 
+                <Route
+                  path="/liveExam"
+                  exact={true}
+                  strict={true}
+                  render={() => <LiveExam />}
+                />
+                :
+                <Route
+                  path="/liveExam"
+                  exact={true}
+                  strict={true}
+                  render={() => <Login />}
+                />
+              }
               <Route
                 path="/liveExam"
                 exact={true}

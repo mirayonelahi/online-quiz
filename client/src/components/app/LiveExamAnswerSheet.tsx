@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Card, Elevation, RadioGroup, Radio } from '@blueprintjs/core';
 import { Store } from 'src/models/Store';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
 
 interface InjecttedPageProps {
@@ -14,17 +14,21 @@ export const LiveExamAnswerSheet = inject('store')(
     const {
       examStore,
       questionExamStore,
-      resultStore,
+      resultStore
       // controller
     } = props.store!;
     let localExam = JSON.parse(localStorage.localExam);
-    let total = questionExamStore.questionExams.filter((questionExam: any) =>
-        questionExam.examId === examStore.exam.id).length;
+    let total = questionExamStore.questionExams.filter(
+      (questionExam: any) => questionExam.examId === examStore.exam.id
+    ).length;
     localStorage.total = JSON.stringify(total);
     let localTempResults = JSON.parse(localStorage.localTempResults);
-    
+    // localStorage.setItem('examFinished', JSON.stringify(true));
+    // localStorage.removeItem('examFinished');
+
     return (
       <Card interactive={true} elevation={Elevation.TWO} className="w-100">
+      {console.log('ami kola', localStorage.examFinished)}
         <div className="answerSheet">
           <div className="answerSheetHeader flex tc mt3 bg-light-green br3">
             <div className="w-30 flex flex-column justify-center">
@@ -32,9 +36,7 @@ export const LiveExamAnswerSheet = inject('store')(
                 <p className="tl pl2 f6 mb0">
                   Negative Mark: {localExam.negativeMark}
                 </p>
-                <p className="tl pl2 f6 mb0">
-                  Total: {localStorage.total}
-                </p>
+                <p className="tl pl2 f6 mb0">Total: {localStorage.total}</p>
               </div>
             </div>
             <div className="w-40 mv2 flex flex-column justify-center">
@@ -44,17 +46,30 @@ export const LiveExamAnswerSheet = inject('store')(
                 Time Left:{' '}
                 <Countdown
                   date={
-                    Date.parse(localStorage.examStartTime) +  (parseInt(localExam.duration, 10) * 60 * 1000)
+                    Date.parse(localStorage.examStartTime) +
+                    parseInt(localExam.duration, 10) * 60 * 100
                   }
-                />{' '}
+                  // {console.log('date', date)}
+                  onComplete={() => {
+                    localStorage.setItem('examFinished', JSON.stringify(true));
+                    console.log(localStorage.examFinished);
+                    resultStore.setTempResults(localTempResults);
+                    resultStore.save();
+                    window.location.reload();
+                    // {() => <Redirect to="/liveExamResultSheet" />}
+                    // {localStorage.examFinished === 'true' ? resultStore.setTempResults(localTempResults) : ''} 
+                    // {localStorage.examFinished === 'true' ? resultStore.save() : ''}
+                    // {localStorage.examFinished === 'true' ? localStorage.examFinished = JSON.stringify(false) : ''} 
+                  }}
+                />
+                {/* {localStorage.examFinished === 'true' ? console.log('notunjaam') : console.log('aaa')}
+                 {localStorage.examFinished === 'false' ? console.log('notunaaaam') : ''} */}
               </p>
             </div>
             <div className="w-30 flex flex-column justify-center">
               <div className="mv3">
                 <p className="tr pr2 f6 mb0">Date: {localExam.date}</p>
-                <p className="tr pr2 f6 mb0">
-                  Duration: {localExam.duration}
-                </p>
+                <p className="tr pr2 f6 mb0">Duration: {localExam.duration}</p>
               </div>
             </div>
           </div>
@@ -62,8 +77,7 @@ export const LiveExamAnswerSheet = inject('store')(
             <div className="w-100 ph2 flex flex-wrap">
               {questionExamStore.questionExams
                 .filter(
-                  (questionExam: any) =>
-                    questionExam.examId === localExam.id
+                  (questionExam: any) => questionExam.examId === localExam.id
                 )
                 .map((questionExam: any, index: number) => (
                   <Card key={index} className="pa3 ma2 w-48">
@@ -74,8 +88,11 @@ export const LiveExamAnswerSheet = inject('store')(
                       parseInt(questionExam.examId!, 10)
                     )} */}
                     <p className="dn">
-                      {localTempResults[index].questionExamId = questionExam.id}
-                      {localTempResults[index].examId = questionExam.examId}
+                      {
+                        (localTempResults[index].questionExamId =
+                          questionExam.id)
+                      }
+                      {(localTempResults[index].examId = questionExam.examId)}
                     </p>
                     <p className="f6 b">
                       <span>{index + 1}. </span> {questionExam.question.title}
@@ -85,7 +102,8 @@ export const LiveExamAnswerSheet = inject('store')(
                         // resultStore.tempResults[index].setGivenAnswer(
                         //   e.currentTarget.value
                         // );
-                        localTempResults[index].givenAnswer = e.currentTarget.value;
+                        localTempResults[index].givenAnswer =
+                          e.currentTarget.value;
                         // if (resultStore.tempResults[index].givenAnswer === '') {
                         //   resultStore.tempResults[index].setMarks(0);
                         // } else if (
@@ -106,7 +124,8 @@ export const LiveExamAnswerSheet = inject('store')(
                         ) {
                           localTempResults[index].marks = 1;
                         } else {
-                          localTempResults[index].marks = 0 + localExam.negativeMark;
+                          localTempResults[index].marks =
+                            0 + localExam.negativeMark;
                         }
                         console.log(localTempResults);
                         // console.log(questionExam.option1 === localTempResults[index].givenAnswer);
@@ -142,10 +161,15 @@ export const LiveExamAnswerSheet = inject('store')(
           onClick={(e: any) => {
             resultStore.setTempResults(localTempResults);
             resultStore.save();
+            // localStorage.examFinished = JSON.stringify(false);
           }}
         >
           Submit Paper
         </Link>
+         {/* {localStorage.examFinished === 'true' ? resultStore.setTempResults(localTempResults) : ''} 
+         {localStorage.examFinished === 'true' ? resultStore.save() : ''} */}
+        {localStorage.examFinished === 'true' ? <Redirect to="/liveExamResultSheet" />  : ''}
+        {/* {localStorage.examFinished === 'true' ? <Redirect to="/liveExamResultSheet" /> : ''} */}
       </Card>
     );
   })

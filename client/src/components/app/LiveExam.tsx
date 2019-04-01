@@ -38,6 +38,8 @@ export const LiveExam = inject('store')(observer((props: InjecttedPageProps) => 
                   localStorage.localExam = JSON.stringify(localExam);
                   const localTempResults: any = resultStore.tempResults;
                   localStorage.localTempResults = JSON.stringify(localTempResults);
+                  localStorage.setItem('examFinished', JSON.stringify(false));
+                  console.log(localStorage.examFinished);
                 }}
               >
                 <p className="b tl">Exam: {exam.title}</p>

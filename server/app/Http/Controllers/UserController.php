@@ -18,6 +18,7 @@ class UserController extends Controller
         $validator = Validator::make($request->json()->all() , [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'role' => 'required|string|max:255',
             'password' => 'required|string|min:6',
         ]);
 
@@ -28,6 +29,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->json()->get('name'),
             'email' => $request->json()->get('email'),
+            'role' => $request->json()->get('role'),
             'password' => Hash::make($request->json()->get('password')),
         ]);
 

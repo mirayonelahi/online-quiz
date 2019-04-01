@@ -71,6 +71,23 @@ export const Register = inject('store')(
               />
             </FormGroup>
           </div>
+          <div className="bp3-input-group w-100">
+            <FormGroup label="Role" labelFor="role">
+              <div className="bp3-select bp3-fill">
+                <select
+                  value={register.role}
+                  onChange={(e: any) => {
+                    e.preventDefault();
+                    register.setRole(e.target.value);
+                  }}
+                >
+                  <option value="">Click to Choose</option>
+                  <option value="admin">Admin</option>
+                  <option value="student">Student</option>
+                </select>
+              </div>
+            </FormGroup>
+          </div>
           <Button
             type="submit"
             className="bp3-button bp3-icon-inbox-update
@@ -81,11 +98,12 @@ export const Register = inject('store')(
               const newUSer = {
                 name: register.firstName + ' ' + register.lastName,
                 email: register.email,
-                password: register.password
+                role: register.role,
+                password: register.password,
               };
               register.register(newUSer).then( res => {
                 console.log('registered', res);
-                return window.location.href = '/';
+                // return window.location.href = '/';
               });
             }}
           >

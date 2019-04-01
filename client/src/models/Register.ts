@@ -6,6 +6,7 @@ export const Register = types
     firstName: types.optional(types.string, ''),
     lastName: types.optional(types.string, ''),
     email: types.optional(types.string, ''),
+    role: types.optional(types.string, ''),
     password: types.optional(types.string, '')
   })
   .actions(self => ({
@@ -20,6 +21,9 @@ export const Register = types
     },
     setPassword(password: string) {
       self.password = password;
+    },
+    setRole(role: string) {
+      self.role = role;
     }
   }))
   .actions(self => ({
@@ -29,7 +33,7 @@ export const Register = types
           headers: { 'Content-Type': 'application/json' }
         })
         .then(res => {
-          console.log(res);
+          console.log('register()->', res);
         })
         .catch(err => {
           console.log(err);

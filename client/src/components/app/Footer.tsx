@@ -8,7 +8,7 @@ export const Footer = observer(() => {
         {/* <div className="bp3-navbar-heading">YourTodo</div> */}
         <strong className="">
           Copyright &copy; 2019{' '}
-          <a href="http://www.redxsolutions.xyz/">RedX Solutions</a>.&#160;
+          <a href="http://www.redxsolutions.xyz/" target="_blank">RedX Solutions</a>.&#160;
         </strong>{' '}
         All rights reserved.
       </div>

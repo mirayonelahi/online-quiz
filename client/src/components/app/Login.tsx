@@ -47,7 +47,7 @@ export const Login = inject('store')(
             </FormGroup>
           </div>
           <Link to="/forgotPassword">
-            <p>Click here to reset password</p>
+            <p>Reset password</p>
           </Link>
           <Button
             type="submit"
@@ -61,7 +61,8 @@ export const Login = inject('store')(
                 password: login.password
               };
               login.login(user).then(res => {
-                return window.location.href = '/';
+                login.getProfile();
+                // return window.location.href = '/';
               });
             }}
           >

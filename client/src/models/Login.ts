@@ -30,7 +30,6 @@ export const Login = types
         )
         .then(res => {
           localStorage.setItem('usertoken', res.data.token);
-          console.log(res);
         })
         .catch(err => {
           console.log(err);
@@ -38,15 +37,15 @@ export const Login = types
     },
     getProfile() {
       return axios
-        .post(
+        .get(
           '/api/profile',
           {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
           }
         )
         .then(res => {
-          console.log(res);
-          return res.data;
+          console.log('getProfile()->', res);
+          // return res.data;
         })
         .catch(err => {
           console.log(err);

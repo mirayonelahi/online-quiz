@@ -17,6 +17,9 @@ import { Example } from './Example';
 import { Login } from './Login';
 import { Register } from './Register';
 import { Profile } from './Profile';
+import { ForgotPassword } from './ForgotPassword';
+import { ResetPassword } from './ResetPassword';
+import { NotAuthorized } from './NotAuthorized';
 
 export const SidebarContent = observer(
   (props: {
@@ -52,6 +55,24 @@ export const SidebarContent = observer(
                 render={() => <Register />}
               />
               <Route
+                path="/forgotPassword"
+                exact={true}
+                strict={true}
+                render={() => <ForgotPassword />}
+              />
+              <Route
+                path="/resetPassword"
+                exact={true}
+                strict={true}
+                render={() => <ResetPassword />}
+              />
+              <Route
+                path="/notAuthorized"
+                exact={true}
+                strict={true}
+                render={() => <NotAuthorized />}
+              />
+              <Route
                 path="/profile"
                 exact={true}
                 strict={true}
@@ -69,7 +90,7 @@ export const SidebarContent = observer(
                   path="/liveExam"
                   exact={true}
                   strict={true}
-                  render={() => <Login />}
+                  render={() => <NotAuthorized />}
                 />
               }
               <Route

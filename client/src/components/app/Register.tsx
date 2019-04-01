@@ -16,9 +16,9 @@ export const Register = inject('store')(
   observer((props: InjecttedPageProps) => {
     const { register } = props.store!;
     return (
-      <Card className="w-100">
+      <Card className="w-50 mAuto">
         <div className="bp3-control-group pa3 flex flex-column">
-          <p className="mb2 b f5 bg-light-green br3 pa1">Register</p>
+          <h2 className="mb2 b tc f2 bg-light-green br3 pa1">Register</h2>
           <div className="bp3-input-group w-100">
             <FormGroup label="First Name" labelFor="firstName">
               <InputGroup

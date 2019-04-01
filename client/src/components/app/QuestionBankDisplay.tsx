@@ -82,7 +82,7 @@ export const QuestionBankDisplay = observer(
             {props.questionStore.questions.map(
               (question: any, index: number) => (
                 <tr key={index}>
-                  <td className="f7">{index}</td>
+                  <td className="f7">{index + 1}</td>
                   <td className="f7">{question.title}</td>
                   <td className="f7">{question.answer}</td>
                   <td className="f7">{question.explanation}</td>

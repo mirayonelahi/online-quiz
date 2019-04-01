@@ -7,19 +7,18 @@ import {
   FormGroup,
   InputGroup
 } from '@blueprintjs/core';
-import { Link } from 'react-router-dom';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
 }
 
-export const Login = inject('store')(
+export const ResetPassword = inject('store')(
   observer((props: InjecttedPageProps) => {
     const { login } = props.store!;
     return (
       <Card className="w-50 mAuto">
         <div className="bp3-control-group pa3 flex flex-column">
-          <h2 className="mb2 b tc f2 bg-light-green br3 pa1">Log In</h2>
+          <h2 className="mb2 b tc f3 bg-light-green br3 pa1">Reset Password</h2>
           <div className="bp3-input-group w-100">
             <FormGroup label="Email Address" labelFor="email">
               <InputGroup
@@ -34,7 +33,7 @@ export const Login = inject('store')(
             </FormGroup>
           </div>
           <div className="bp3-input-group w-100">
-            <FormGroup label="Password" labelFor="password">
+            <FormGroup label="New Password" labelFor="password">
               <InputGroup
                 id="password"
                 placeholder="******"
@@ -46,26 +45,16 @@ export const Login = inject('store')(
               />
             </FormGroup>
           </div>
-          <Link to="/forgotPassword">
-            <p>Click here to reset password</p>
-          </Link>
           <Button
             type="submit"
-            className="bp3-button bp3-icon-log-in
+            className="bp3-button bp3-icon-confirm
               bp3-intent-success bp3-popover-dismiss pointer
               br2Important mv1 bg-animate w-100 noOutline"
-            onClick={(e: any) => {
-              e.preventDefault();
-              const user = {
-                email: login.email,
-                password: login.password
-              };
-              login.login(user).then(res => {
-                return window.location.href = '/';
-              });
-            }}
+            // onClick={(e: any) => {
+              
+            // }}
           >
-            Log In
+            Change Password
           </Button>
         </div>
       </Card>

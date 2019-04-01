@@ -78,7 +78,7 @@ export const SubjectSettingsDisplay = observer(
           <tbody>
             {props.subjectStore.subjects.map((subject: any, index: number) => (
               <tr key={index}>
-                <td className="f7">{index}</td>
+                <td className="f7">{index + 1}</td>
                 <td className="f7">{subject.id}</td>
                 <td className="f7">{subject.title}</td>
                 <td className="f7">{subject.code}</td>

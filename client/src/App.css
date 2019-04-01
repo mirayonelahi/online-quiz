@@ -27,6 +27,9 @@
 .f45{
   font-size: 45px !important;
 }
+.f80 {
+  font-size: 80px !important;
+}
 .df{
   display: flex !important;
 }
@@ -62,6 +65,9 @@
 }
 .marginL183{
   margin-left: 183px;
+}
+.mAuto{
+  margin: auto;
 }
 /* header */
 .headerNav{

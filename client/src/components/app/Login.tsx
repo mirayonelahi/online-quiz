@@ -15,7 +15,7 @@ interface InjecttedPageProps {
 
 export const Login = inject('store')(
   observer((props: InjecttedPageProps) => {
-    const { login } = props.store!;
+    const { login, controller } = props.store!;
     return (
       <Card className="w-50 mAuto">
         <div className="bp3-control-group pa3 flex flex-column">
@@ -61,7 +61,10 @@ export const Login = inject('store')(
                 password: login.password
               };
               login.login(user).then(res => {
-                login.getProfile();
+                login.getProfile().then(() => {
+                  controller.setUserRole(JSON.parse(localStorage.user).role);
+                  controller.loggedInTrue();
+                });
                 // return window.location.href = '/';
               });
             }}

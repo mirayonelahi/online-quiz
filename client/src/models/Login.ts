@@ -44,7 +44,8 @@ export const Login = types
           }
         )
         .then(res => {
-          console.log('getProfile()->', res);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          console.log('getProfile()->', localStorage.user);
           // return res.data;
         })
         .catch(err => {

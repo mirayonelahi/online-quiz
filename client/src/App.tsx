@@ -1,11 +1,10 @@
 import * as React from 'react';
 import './App.css';
-import { Header } from './components/app/Header';
 import { inject } from 'mobx-react';
 import { Store } from './models/Store';
 import { Footer } from './components/app/Footer';
 import { BrowserRouter } from 'react-router-dom';
-import { SidebarContent } from './components/app/SidebarContent';
+import { HeaderSidebarContent } from './components/app/HeaderSidebarContent';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
@@ -16,14 +15,7 @@ export const App = inject('store')((props: InjecttedPageProps) => {
     <>
       <BrowserRouter>
         <section className="appSection">
-          <Header
-            controller={props.store!.controller}
-            // setSidebarOpen={(e) => setSidebarOpen(!sidebarOpen)}
-          />
-          <SidebarContent 
-            controller={props.store!.controller}
-            store={props.store!}
-          />
+          <HeaderSidebarContent />>
           <Footer />
         </section>
       </BrowserRouter>

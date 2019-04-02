@@ -9,30 +9,20 @@ export const Sidebar = observer(
   }) => {
     return (
       <section
-        className={`sidebarSection ${
-          props.controller.sidebarClose ? 'sidebarW40 ' : ''
-        } transitionAll `}
+        className={`sidebarSection ${props.controller.sidebarClose ? 'sidebarW40 ' : ''}
+          ${props.controller.loggedIn ? ' ' : 'dn'} transitionAll `}
       >
         <ul
           className={`h-100 bp3-menu bp3-elevation-1 minWidthUnset ${
             props.controller.sidebarClose ? 'sidebarW40 ' : ''
-          } transitionAll `}
+            } transitionAll `}
         >
-          <li className="active">
-            <Link to="/" className="sidebarLinks">
-              <i className="bp3-menu-item bp3-icon-home">
-                <span className="bp3-heading ma0">
-                  {props.controller.sidebarClose ? '' : 'Home'}
-                </span>
-              </i>
-            </Link>
-          </li>
           <li className="bp3-menu-header">
             <h6 className="bp3-heading">
               {props.controller.sidebarClose ? '' : 'Examinations'}
             </h6>
           </li>
-          <li className="">
+          <li className="active">
             <Link to="/liveExam" className="sidebarLinks">
               <i className="bp3-menu-item bp3-icon-clipboard">
                 <span className="bp3-heading ma0">
@@ -50,12 +40,12 @@ export const Sidebar = observer(
               </i>
             </Link>
           </li>
-          <li className="bp3-menu-header">
+          <li className={`bp3-menu-header ${props.controller.userRole !== 'admin' ? ' dn' : ''}`}>
             <h6 className="bp3-heading">
               {props.controller.sidebarClose ? '' : 'Data Store'}
             </h6>
           </li>
-          <li>
+          <li className={`${props.controller.userRole !== 'admin' ? ' dn' : ''}`}>
             <Link to="/dataBank" className="sidebarLinks">
               <i className="bp3-menu-item bp3-icon-th">
                 <span className="bp3-heading ma0">

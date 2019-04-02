@@ -19,34 +19,70 @@ export const Header = observer(
           <div className="bp3-navbar-heading f4 ml1">Online Quiz</div>
         </div>
         <div className="bp3-navbar-group bp3-align-right">
-          <button className="bp3-button bp3-minimal bp3-icon-home">
-            <Link to="/" className="sidebarLinks">
-              Home
-            </Link>
-          </button>
-          <button className="bp3-button bp3-minimal bp3-icon-document">
-            <Link to="/activityLog" className="sidebarLinks">
-              Database
-            </Link>
-          </button>
+          {props.controller.loggedIn ?
+            <button className="bp3-button bp3-minimal bp3-icon-home">
+              <Link to="/home" className="sidebarLinks">
+                Home
+              </Link>
+            </button>
+            :
+            <button className="bp3-button bp3-minimal bp3-icon-log-in">
+              <Link to="/login" className="sidebarLinks">
+                Log In
+              </Link>
+            </button>
+          }
+          {props.controller.loggedIn ?
+            <button className="bp3-button bp3-minimal bp3-icon-user">
+              <Link to="/profile" className="sidebarLinks">
+                profile
+              </Link>
+            </button>
+            :
+            undefined
+          }
+          {props.controller.loggedIn ?
+            <button
+              className={`bp3-button bp3-minimal bp3-icon-inbox-update
+                ${props.controller.userRole !== 'admin' ? ' dn' : ''}`}
+            >
+              <Link to="/register" className="sidebarLinks">
+                Registration
+              </Link>
+            </button>
+            :
+            undefined
+          }
           <span className="bp3-navbar-divider" />
-          <button
-           className="bp3-button bp3-minimal bp3-icon-user"
-           onClick={(e: any) => {
-            e.preventDefault();
-            return window.location.href = '/profile';
-          }}
-          />
-          <button className="bp3-button bp3-minimal bp3-icon-notifications" />
-          <button className="bp3-button bp3-minimal bp3-icon-cog" />
-          <button
-           className="bp3-button bp3-minimal bp3-icon-log-out"
-           onClick={(e: any) => {
-            e.preventDefault();
-            localStorage.removeItem('usertoken');
-            return window.location.href = '/login';
-          }}
-          />
+          {props.controller.loggedIn ?
+            <button className="bp3-button bp3-minimal bp3-icon-notifications" />
+            :
+            <button className="bp3-button bp3-minimal bp3-icon-clipboard">
+              <Link to="/home" className="sidebarLinks">
+                Practice Exam
+              </Link>
+            </button>
+          }
+          {props.controller.loggedIn ?
+            <button className="bp3-button bp3-minimal bp3-icon-cog" />
+            :
+            undefined
+          }
+          {props.controller.loggedIn ?
+            <button
+              className="bp3-button bp3-minimal bp3-icon-log-out"
+              onClick={(e: any) => {
+                e.preventDefault();
+                localStorage.removeItem('usertoken');
+                localStorage.removeItem('user');
+                props.controller.setUserRole('default');
+                props.controller.loggedInFalse();
+                // return window.location.href = '/login';
+              }}
+            />
+            :
+            undefined
+          }
         </div>
       </nav>
     );

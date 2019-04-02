@@ -35,7 +35,7 @@ export const Header = observer(
           {props.controller.loggedIn ?
             <button className="bp3-button bp3-minimal bp3-icon-user">
               <Link to="/profile" className="sidebarLinks">
-                profile
+                {JSON.parse(localStorage.user).name}
               </Link>
             </button>
             :

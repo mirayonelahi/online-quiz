@@ -18,13 +18,13 @@ export const Register = inject('store')(
     return (
       <Card className="w-50 mAuto">
         <div className="bp3-control-group pa3 flex flex-column">
-          <h2 className="mb2 b tc f2 bg-light-green br3 pa1">Register</h2>
+          <h2 className="mb2 b tc f2 bg-light-green br3 pa1">Registration</h2>
           <div className="bp3-input-group w-100">
             <FormGroup label="First Name" labelFor="firstName">
               <InputGroup
                 id="firstName"
                 placeholder="Mahmoodun"
-                leftIcon="envelope"
+                leftIcon="user"
                 value={register.firstName}
                 onChange={(e: any) => {
                   register.setFirstName(e.target.value);
@@ -37,7 +37,7 @@ export const Register = inject('store')(
               <InputGroup
                 id="lastName"
                 placeholder="Nabi"
-                leftIcon="envelope"
+                leftIcon="user"
                 value={register.lastName}
                 onChange={(e: any) => {
                   register.setLastName(e.target.value);

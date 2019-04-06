@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Store } from 'src/models/Store';
-import { QuestionExamForm } from './QuestionExamForm';
-import { QuestionExamList } from './QuestionExamList';
+import { QuestionExamForm } from '../QuestionExam/QuestionExamForm';
+import { QuestionExamList } from '../QuestionExam/QuestionExamList';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;

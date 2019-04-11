@@ -28,7 +28,7 @@ export const Controller = types
     },
     setUserRole(userRole: string) {
       self.userRole = userRole;
-      console.log('setUserRole', userRole);
+      console.log('setUserRole()->', userRole);
     }
     // setTimesave(examStartTime: any) {
     //   self.examStartTime = examStartTime; 
@@ -38,6 +38,7 @@ export const Controller = types
     afterCreate() {
       if (localStorage.user) {
         self.loggedInTrue();
+        self.setUserRole(JSON.parse(localStorage.user).role);
       } else if (!localStorage.user) {
         self.loggedInFalse();
       }

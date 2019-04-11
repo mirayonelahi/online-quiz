@@ -20,36 +20,30 @@ export const Header = observer(
         </div>
         <div className="bp3-navbar-group bp3-align-right">
           {props.controller.loggedIn ?
-            <button className="bp3-button bp3-minimal bp3-icon-home">
-              <Link to="/home" className="sidebarLinks">
-                Home
-              </Link>
-            </button>
+            <Link to="/home" className="sidebarLinks">
+              <button className="bp3-button bp3-minimal bp3-icon-home"> Home</button>
+            </Link>
             :
-            <button className="bp3-button bp3-minimal bp3-icon-log-in">
-              <Link to="/login" className="sidebarLinks">
-                Log In
-              </Link>
-            </button>
+            <Link to="/login" className="sidebarLinks">
+              <button className="bp3-button bp3-minimal bp3-icon-log-in"> Log In</button>
+            </Link>
           }
           {props.controller.loggedIn ?
-            <button className="bp3-button bp3-minimal bp3-icon-user">
-              <Link to="/profile" className="sidebarLinks">
-                {JSON.parse(localStorage.user).name}
-              </Link>
-            </button>
+            <Link to="/profile" className="sidebarLinks">
+              <button className="bp3-button bp3-minimal bp3-icon-user"> {JSON.parse(localStorage.user).name}</button>
+            </Link>
             :
             undefined
           }
           {props.controller.loggedIn ?
-            <button
-              className={`bp3-button bp3-minimal bp3-icon-inbox-update
+            <Link to="/register" className="sidebarLinks">
+              <button
+                className={`bp3-button bp3-minimal bp3-icon-inbox-update
                 ${props.controller.userRole !== 'admin' ? ' dn' : ''}`}
-            >
-              <Link to="/register" className="sidebarLinks">
+              >
                 Registration
-              </Link>
-            </button>
+              </button>
+            </Link>
             :
             undefined
           }
@@ -57,11 +51,9 @@ export const Header = observer(
           {props.controller.loggedIn ?
             <button className="bp3-button bp3-minimal bp3-icon-notifications" />
             :
-            <button className="bp3-button bp3-minimal bp3-icon-clipboard">
-              <Link to="/home" className="sidebarLinks">
-                Practice Exam
-              </Link>
-            </button>
+            <Link to="/home" className="sidebarLinks">
+              <button className="bp3-button bp3-minimal bp3-icon-clipboard"> Practice Exam</button>
+            </Link>
           }
           {props.controller.loggedIn ?
             <button className="bp3-button bp3-minimal bp3-icon-cog" />

@@ -7,7 +7,7 @@ import {
   FormGroup,
   InputGroup
 } from '@blueprintjs/core';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;
@@ -16,6 +16,9 @@ interface InjecttedPageProps {
 export const Login = inject('store')(
   observer((props: InjecttedPageProps) => {
     const { login, controller } = props.store!;
+    if (controller.userRole !== 'default') {
+      return <Redirect to="home"/>;
+    }
     return (
       <Card className="w-50 mAuto">
         <div className="bp3-control-group pa3 flex flex-column">

@@ -29,3 +29,4 @@ Route::apiResources(
 );
 Route::get('search/subjects/{field}/{query}','API\SubjectController@search');
 Route::get('search/questions/{field}/{query}','API\QuestionController@search');
+

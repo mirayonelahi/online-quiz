@@ -58,13 +58,16 @@ export const Sidebar = observer(
             <h6 className="bp3-heading">{props.controller.sidebarClose ? '' : 'Report'}</h6>
           </li>
           <li>
-            <Link to="/activityLog" className="sidebarLinks">
+            <a
+              href="http://localhost:8000/pay"
+              className="sidebarLinks"
+            >
               <i className="bp3-menu-item bp3-icon-automatic-updates">
                 <span className="bp3-heading ma0">
-                  {props.controller.sidebarClose ? '' : 'Activity Log'}
+                  {props.controller.sidebarClose ? '' : 'Payment Gateway'}
                 </span>
               </i>
-            </Link>
+            </a>
           </li>
         </ul>
       </section>

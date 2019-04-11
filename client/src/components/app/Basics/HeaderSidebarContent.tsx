@@ -5,7 +5,7 @@ import { ExamSettings } from '../examSettings/ExamSettings';
 import { DataBank } from './DataBank';
 import { SubjectSettings } from '../subjectSettings/SubjectSettings';
 import { QuestionBank } from '../questionBank/QuestionBank';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 import { Home } from './Home';
 import { Sidebar } from './Sidebar';
 import { LiveExam } from '../liveExam/LiveExam';

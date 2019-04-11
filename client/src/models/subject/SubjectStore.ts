@@ -1,4 +1,4 @@
-import { SearchStore } from './SearchStore';
+import { SearchStore } from '../basics/SearchStore';
 import { types, getSnapshot } from 'mobx-state-tree';
 import { Subject } from './Subject';
 import axios from 'axios';

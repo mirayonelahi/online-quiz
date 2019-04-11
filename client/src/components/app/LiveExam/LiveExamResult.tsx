@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Card, Elevation } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;

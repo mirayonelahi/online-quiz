@@ -4,7 +4,7 @@ import { App } from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'mobx-react';
-import { Store } from './models/Store';
+import { Store } from './models/basics/Store';
 import 'tachyons';
 
 const store = Store.create();

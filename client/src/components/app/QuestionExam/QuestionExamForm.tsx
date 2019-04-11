@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { InputGroup, Button } from '@blueprintjs/core';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 
 interface InjecttedPageProps {
   store?: typeof Store.Type;

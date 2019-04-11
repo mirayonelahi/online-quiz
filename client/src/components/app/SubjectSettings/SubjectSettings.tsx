@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { Card, Elevation } from '@blueprintjs/core';
 import { SubjectSettingsForm } from './SubjectSettingsForm';
 import { SubjectSettingsDisplay } from './SubjectSettingsDisplay';
-import { SubjectStore } from 'src/models/SubjectStore';
+import { SubjectStore } from 'src/models/subject/SubjectStore';
 
 export const SubjectSettings = observer(
   (props: { subjectStore: typeof SubjectStore.Type }) => {

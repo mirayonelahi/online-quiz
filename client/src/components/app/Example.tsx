@@ -2,7 +2,7 @@
 import React from 'react';
 import Countdown from 'react-countdown-now';
 import { observer } from 'mobx-react';
-import { Controller } from 'src/models/Controller';
+import { Controller } from 'src/models/basics/Controller';
 // var now: Date = new Date();
 // // var ready = moment(now)
 // //   .add(30, 'm')

@@ -7,7 +7,7 @@ import {
 } from '@blueprintjs/core';
 import { ExamSettingsForm } from './ExamSettingsForm';
 import { ExamSettingsDisplay } from './ExamSettingsDisplay';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 interface InjecttedPageProps {
   store?: typeof Store.Type;
 }

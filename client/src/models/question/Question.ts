@@ -1,4 +1,4 @@
-import { Subject } from './Subject';
+import { Subject } from '../subject/Subject';
 import { types, getSnapshot } from 'mobx-state-tree';
 import axios from 'axios';
 

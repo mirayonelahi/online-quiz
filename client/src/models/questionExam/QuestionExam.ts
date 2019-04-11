@@ -1,6 +1,6 @@
 import { types, getSnapshot } from 'mobx-state-tree';
-import { Exam } from './Exam';
-import { Question } from './Question';
+import { Exam } from '../exam/Exam';
+import { Question } from '../question/Question';
 import axios from 'axios';
 
 export const QuestionExam = types

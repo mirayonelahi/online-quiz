@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 import { FormGroup, InputGroup, NumericInput } from '@blueprintjs/core';
 // import { TimePrecision } from '@blueprintjs/datetime';
 import Datetime from 'react-datetime';

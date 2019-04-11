@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import { Controller } from 'src/models/Controller';
+import { Controller } from 'src/models/basics/Controller';
 
 export const Sidebar = observer(
   (props: {

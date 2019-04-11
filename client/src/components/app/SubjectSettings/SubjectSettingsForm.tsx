@@ -9,7 +9,7 @@ import {
   Tooltip,
   FileInput
 } from '@blueprintjs/core';
-import { SubjectStore } from 'src/models/SubjectStore';
+import { SubjectStore } from 'src/models/subject/SubjectStore';
 
 export const SubjectSettingsForm = observer(
   (props: { subjectStore: typeof SubjectStore.Type }) => {

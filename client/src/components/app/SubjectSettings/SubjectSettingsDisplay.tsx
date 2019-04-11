@@ -10,7 +10,7 @@ import {
   FormGroup,
   InputGroup
 } from '@blueprintjs/core';
-import { SubjectStore } from 'src/models/SubjectStore';
+import { SubjectStore } from 'src/models/subject/SubjectStore';
 
 export const SubjectSettingsDisplay = observer(
   (props: { subjectStore: typeof SubjectStore.Type }) => {

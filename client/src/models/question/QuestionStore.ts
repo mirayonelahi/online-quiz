@@ -1,7 +1,7 @@
 import { Question } from './Question';
 import { types, getSnapshot } from 'mobx-state-tree';
 import axios from 'axios';
-import { SearchStore } from './SearchStore';
+import { SearchStore } from '../basics/SearchStore';
 
 export const QuestionStore = types
   .model('questiostore', {

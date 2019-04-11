@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Card, Elevation, RadioGroup, Radio } from '@blueprintjs/core';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 import { Link, Redirect } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
 

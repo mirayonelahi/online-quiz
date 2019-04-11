@@ -1,7 +1,7 @@
 import { types, getSnapshot } from 'mobx-state-tree';
 import axios from 'axios';
-import { QuestionExam } from './QuestionExam';
-import { Exam } from './Exam';
+import { QuestionExam } from '../questionExam/QuestionExam';
+import { Exam } from '../exam/Exam';
 
 export const Result = types.model('result', {
   id: types.maybe(types.number),

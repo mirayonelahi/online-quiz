@@ -1,5 +1,5 @@
 import { observer, inject } from 'mobx-react';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 import React from 'react';
 import { Card, Elevation } from '@blueprintjs/core';
 import { ExamSettingsTable } from './ExamSettingsTable';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
-import { Store } from 'src/models/Store';
+import { Store } from 'src/models/basics/Store';
 import {
   Card,
 } from '@blueprintjs/core';

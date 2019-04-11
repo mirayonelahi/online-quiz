@@ -6,8 +6,8 @@ import {
 } from '@blueprintjs/core';
 import { QuestionBankForm } from './QuestionBankForm';
 import { QuestionBankDisplay } from './QuestionBankDisplay';
-import { QuestionStore } from 'src/models/QuestionStore';
-import { SubjectStore } from 'src/models/SubjectStore';
+import { QuestionStore } from 'src/models/question/QuestionStore';
+import { SubjectStore } from 'src/models/subject/SubjectStore';
 
 export const QuestionBank = observer((
   props: {questionStore: typeof QuestionStore.Type; subjectStore: typeof SubjectStore.Type }
